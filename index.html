@@ -266,8 +266,16 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
       <div class="body-pad">
         <div class="stitle">The invitation</div>
         <div class="ssub">Party details only.</div>
-        <span class="flbl">Child's name</span>
-        <input class="fin" id="cname" placeholder="Mia" oninput="upd()">
+        <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:0">
+          <div style="flex:1"><span class="flbl">Child's name</span><input class="fin" id="cname" placeholder="Mia" oninput="upd()" style="margin-bottom:0"></div>
+          <div style="flex-shrink:0;margin-bottom:13px"><span class="flbl">Pronoun</span>
+            <div style="display:flex;gap:5px;align-items:center;margin-top:4px">
+              <button id="pr-she" onclick="pickPronoun('she')" style="padding:8px 10px;border-radius:9px;border:1.5px solid var(--red);background:var(--red);color:white;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">She</button>
+              <button id="pr-he" onclick="pickPronoun('he')" style="padding:8px 10px;border-radius:9px;border:1.5px solid rgba(122,92,58,.25);background:var(--warm);color:var(--purple);font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">He</button>
+              <input id="pr-custom" oninput="pickPronoun('custom')" placeholder="Other" style="width:52px;padding:7px 8px;border-radius:9px;border:1.5px solid rgba(122,92,58,.25);background:var(--warm);color:var(--purple);font-size:12px;font-family:'DM Sans',sans-serif;text-align:center">
+            </div>
+          </div>
+        </div>
         <div class="frow" style="margin-bottom:13px">
           <div class="fg"><span class="flbl">Date</span><input class="fin" style="margin-bottom:0" type="date" id="pdate" oninput="upd()"></div>
           <div class="fg"><span class="flbl">Time</span><input class="fin" style="margin-bottom:0" type="time" id="ptime" value="14:00" oninput="upd()"></div>
@@ -310,6 +318,21 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
       </div>
       <div class="body-pad">
         <div class="stitle">What does your child wish for?</div>
+
+        <div style="margin-bottom:20px">
+          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:12px">Would you like to organise a group gift?</div>
+          <div id="giftRouteBox" style="display:flex;flex-direction:column;gap:8px">
+            <div id="routePlatform" onclick="pickRoute('platform')" style="display:flex;align-items:flex-start;gap:12px;background:var(--warm);border:2px solid var(--red);border-radius:12px;padding:14px 16px;cursor:pointer">
+              <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--red);background:var(--red);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center"><div style="width:7px;height:7px;border-radius:50%;background:white"></div></div>
+              <div><div style="font-size:13px;font-weight:700;color:var(--purple)">Yes, through the platform</div><div style="font-size:11px;color:var(--mid);margin-top:3px;line-height:1.5">Guests see the gift option when they RSVP</div></div>
+            </div>
+            <div id="routeFriend" onclick="pickRoute('friend')" style="display:flex;align-items:flex-start;gap:12px;background:var(--warm);border:2px solid rgba(122,92,58,.2);border-radius:12px;padding:14px 16px;cursor:pointer">
+              <div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(122,92,58,.3);background:transparent;flex-shrink:0;margin-top:2px"></div>
+              <div><div style="font-size:13px;font-weight:700;color:var(--purple)">Yes, through a friend</div><div style="font-size:11px;color:var(--mid);margin-top:3px;line-height:1.5">Guests just confirm attendance — a friend reaches out personally about the gift</div></div>
+            </div>
+          </div>
+        </div>
+
         <div class="toggle-row">
           <div><div class="toggle-label">Anonymise contributions</div><div class="toggle-sub">Individual amounts stay private</div></div>
           <button class="toggle on" id="anonToggle" onclick="toggleAnon()"></button>
@@ -375,16 +398,15 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
                 <div class="idea-tile-name">📚 Swap</div>
                 <div class="idea-tile-desc">Book / toy / Lego / other</div>
               </div>
-              <div class="idea-tile" id="it3" onclick="pickIdea(3,'Food for a food bank','Each guest brings a tin or packet of food — we will deliver it together after the party.')">
-                <div class="idea-tile-name">🍎 Food bank</div>
-                <div class="idea-tile-desc">Bring a tin or packet of food</div>
+              <div class="idea-tile" id="it3" onclick="pickIdea(0,'','')">
+                <div class="idea-tile-name">✏️ Write your own</div>
+                <div class="idea-tile-desc">Or write your own idea</div>
               </div>
               <div class="idea-tile" id="it4" onclick="pickIdea(4,'Toy repair workshop','Bring a broken toy — we will fix and upcycle it together at the party.')">
                 <div class="idea-tile-name">🔧 Toy repair</div>
                 <div class="idea-tile-desc">Bring a broken toy to fix</div>
               </div>
             </div>
-            <div class="idea-own-link" onclick="pickIdea(0,'','')">✏️ Or write your own idea</div>
             <div class="idea-fields" id="ideaFields">
               <span class="flbl">What's the idea?</span>
               <input class="fin" id="ideaName" placeholder="A friendship garden..." style="margin-bottom:10px">
@@ -395,48 +417,40 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
         </div>
 
         <div style="margin-top:20px;margin-bottom:10px">
-          <button class="btn-green" onclick="genInviteLink()">🔗 Generate invite link</button>
-          <div id="inviteLinkBox" style="display:none;margin-bottom:10px">
-            <div style="background:var(--warm);border:1.5px solid rgba(122,92,58,.2);border-radius:11px;padding:12px 14px;font-size:11px;color:var(--dark);word-break:break-all;line-height:1.6;margin-bottom:8px" id="inviteLinkText"></div>
-            <div style="display:flex;gap:8px">
-              <button class="btn-green" style="flex:1;margin:0" onclick="copyInviteLink()">📋 Copy link</button>
-              <button class="btn-green" style="flex:1;margin:0;background:#25D366;color:white" onclick="waShare()">💬 WhatsApp</button>
-            </div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Step 1 — Create your invite link</div>
+          <button class="btn-green" onclick="genInviteLink()" id="genBtn">🔗 Generate invite link</button>
+
+          <div id="inviteLinkBox" style="display:none;margin-bottom:4px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Step 2 — Send it to parents</div>
+            <button class="btn-green" onclick="waShare()" style="background:#25D366;color:white;font-size:15px;padding:14px">💬 Send invite on WhatsApp</button>
           </div>
-          <button class="btn-green" onclick="cp()">📋 Copy WhatsApp message</button>
-          <button class="btn-cream" style="margin-bottom:32px" onclick="go(4)">You're all set →</button>
+
+          <button class="btn-cream" style="margin-bottom:32px;margin-top:8px" onclick="go(4)">Done →</button>
         </div>
       </div>
     </div>
 
     <!-- SCREEN 4 -->
     <div class="screen" id="s4">
+      <div style="padding:12px 20px 0;display:flex;align-items:center">
+        <button class="back" onclick="go(3)">←</button>
+      </div>
       <div class="s4-banner">
         <div class="s4-chk">✓</div>
         <div class="s4-conf"><strong>Your invite is ready 🎉</strong><span id="s4name2"></span></div>
       </div>
       <div class="s4-body">
-        <div id="s4-link-ready" style="display:none">
-          <div style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px;border:1.5px solid rgba(122,92,58,.15)">
-            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Your invite link</div>
-            <div id="s4-url-display" style="font-size:11px;color:var(--dark);word-break:break-all;line-height:1.65;background:rgba(122,92,58,.07);border-radius:8px;padding:10px 12px"></div>
-          </div>
-          <button class="btn-cream" onclick="copyInviteLink()" style="margin-bottom:10px">📋 Copy invite link</button>
-          <button class="btn-green" onclick="waShare()" style="background:#25D366;color:white;margin-bottom:24px">💬 Send on WhatsApp</button>
-        </div>
-        <div id="s4-no-link" style="display:none;background:rgba(242,139,59,.1);border-radius:14px;padding:16px;margin-bottom:16px;border:1.5px solid rgba(242,139,59,.3)">
-          <div style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:6px">Generate your invite link first</div>
-          <div style="font-size:12px;color:var(--dark);line-height:1.6">Go back to screen 3, fill in your PayPal.me username and tap <strong>Generate invite link</strong>.</div>
-          <button class="btn-green" onclick="go(3)" style="margin-top:12px;margin-bottom:0">← Back to gift setup</button>
+        <div style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px;text-align:center">
+          <div style="font-size:32px;margin-bottom:8px">🎉</div>
+          <div style="font-size:14px;font-weight:700;color:var(--purple);margin-bottom:4px">Your invite has been sent!</div>
+          <div id="s4-msg-platform" style="font-size:12px;color:var(--mid);line-height:1.6">Parents will receive a link to RSVP and join the group gift.</div>
+          <div id="s4-msg-friend" style="font-size:12px;color:var(--mid);line-height:1.6;display:none">Parents will receive all the party details. Once they confirm attendance, your friend will reach out about the group gift.</div>
         </div>
 
-        <div style="margin-top:8px;border-top:1.5px solid rgba(122,92,58,.12);padding-top:16px">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:12px">Optional next step</div>
-          <div class="toggle-row champ-section" id="champSection">
-            <div><div class="toggle-label">Ask a friend to take the lead</div><div class="toggle-sub">Pass the gift share message to someone you trust</div></div>
-            <button class="toggle" id="champToggle" onclick="toggleChamp()"></button>
-          </div>
-          <div id="champExpand" style="display:none">
+        <div style="margin-top:8px;border-top:1.5px solid rgba(122,92,58,.12);padding-top:16px;display:none" id="champSection">
+          <div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:4px">Next step</div>
+          <div style="font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:16px">Your friend will reach out about the group gift. Provide their details below.</div>
+          <div id="champExpand">
             <div class="champ-fields">
               <span class="flbl">Champion's name</span>
               <input class="fin" id="champName" placeholder="Emma" style="margin-bottom:10px" oninput="updChamp()">
@@ -560,19 +574,41 @@ function go(n){
     var name=document.getElementById('cname').value.trim();
     var s4name2=document.getElementById('s4name2');
     if(s4name2)s4name2.textContent=name?'  — '+name+'\'s party':'';
-    var linkReady=document.getElementById('s4-link-ready');
-    var noLink=document.getElementById('s4-no-link');
-    var urlDisplay=document.getElementById('s4-url-display');
-    if(window._inviteUrl){
-      if(linkReady)linkReady.style.display='block';
-      if(noLink)noLink.style.display='none';
-      if(urlDisplay)urlDisplay.textContent=window._inviteUrl;
+    var msgPlatform=document.getElementById('s4-msg-platform');
+    var msgFriend=document.getElementById('s4-msg-friend');
+    if(msgPlatform)msgPlatform.style.display=giftRoute==='friend'?'none':'block';
+    if(msgFriend)msgFriend.style.display=giftRoute==='friend'?'block':'none';
+    var champSect=document.getElementById('champSection');
+    if(giftRoute==='friend'){
+      if(champSect)champSect.style.display='block';
+      updChamp();
     } else {
-      if(linkReady)linkReady.style.display='none';
-      if(noLink)noLink.style.display='block';
+      if(champSect)champSect.style.display='none';
     }
   }
 }
+var childPronoun='she';
+function pickPronoun(p){
+  childPronoun=p;
+  var btnShe=document.getElementById('pr-she');
+  var btnHe=document.getElementById('pr-he');
+  var inp=document.getElementById('pr-custom');
+  [btnShe,btnHe].forEach(function(b){if(b){b.style.background='var(--warm)';b.style.color='var(--purple)';b.style.border='1.5px solid rgba(122,92,58,.25)';}});
+  if(p==='she'&&btnShe){btnShe.style.background='var(--red)';btnShe.style.color='white';btnShe.style.border='1.5px solid var(--red)';if(inp)inp.style.border='1.5px solid rgba(122,92,58,.25)';}
+  if(p==='he'&&btnHe){btnHe.style.background='var(--red)';btnHe.style.color='white';btnHe.style.border='1.5px solid var(--red)';if(inp)inp.style.border='1.5px solid rgba(122,92,58,.25)';}
+  if(p==='custom'&&inp){inp.style.border='1.5px solid var(--red)';}
+  updChamp();
+}
+function getPronounVerb(){
+  if(childPronoun==='he') return 'He\'s';
+  if(childPronoun==='custom'){
+    var v=document.getElementById('pr-custom');
+    var t=v?v.value.trim():'';
+    if(t) return t.charAt(0).toUpperCase()+t.slice(1)+'\'s';
+  }
+  return 'She\'s';
+}
+
 function pickChar(n){
   ['char1','char2'].forEach((c,i)=>document.getElementById(c).classList.toggle('sel',i+1===n));
   curAv=n===1?f1:f2;
@@ -616,11 +652,11 @@ function cp(){
   const note=document.getElementById('personalNote')?document.getElementById('personalNote').value:'';
   const url=window._inviteUrl||'(generate your invite link first)';
   const ds=d?new Date(d).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}):d;
-  let msg=n+' is turning 10! 🎂';
+  let msg=n+' is turning 10! \uD83C\uDF82';
   if(note)msg+='\n'+note;
-  if(ds)msg+='\n📅 '+ds;
-  if(t)msg+='\n⏰ '+t;
-  if(l)msg+='\n📍 '+l;
+  if(ds)msg+='\n\uD83D\uDCC5 '+ds;
+  if(t)msg+='\n\u23F0 '+t;
+  if(l)msg+='\n\uD83D\uDCCD '+l;
   msg+='\n\nAll the details and RSVP here: '+url;
   navigator.clipboard.writeText(msg).then(()=>{
     const b=document.querySelectorAll('.btn-green');
@@ -700,10 +736,11 @@ function updChamp(){
   const wish=document.getElementById('cwish').value||'a bike';
   const max=document.getElementById('maxamt').value||'10';
   const slug=childName.toLowerCase().replace(/\s/g,'-');
-  const line1='Hey! You know ' + childName + "'s birthday is coming up \u{1F382}";
-  const line2='She' + "'" + 's been dreaming about ' + wish + '.';
+  const line1='Hey! You know ' + childName + "'s birthday is coming up \uD83C\uDF82";
+  const pronoun=childPronoun==='he'?'He':childPronoun==='they'?'They':'She';
+  const line2=getPronounVerb()+' been dreaming about ' + wish + '.';
   const line3='It would be lovely to make it happen as a group - totally optional, max \u00A3' + max + ' each, all anonymous.';
-  const line4='Here' + "'" + 's the link if you' + "'" + 'd like to join in: '+(window._inviteUrl||'(generate your invite link first)');
+  const line4='Here' + "'" + 's the link if you' + "'" + 'd like to join in: '+(window._giftUrl||window._inviteUrl||'(generate your invite link first)');
   const msg = line1 + '\n' + line2 + '\n' + line3 + '\n' + line4;
   document.getElementById('champMsgTa').value = msg;
   const champNameEl = document.getElementById('champWaName');
@@ -777,6 +814,24 @@ function gContribute(){
 }
 
 /* ---- Link generation ---- */
+var giftRoute='platform';
+function pickRoute(r){
+  giftRoute=r;
+  var rp=document.getElementById('routePlatform');
+  var rf=document.getElementById('routeFriend');
+  if(r==='platform'){
+    rp.style.border='2px solid var(--red)';
+    rp.querySelector('div').innerHTML='<div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--red);background:var(--red);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center"><div style="width:7px;height:7px;border-radius:50%;background:white"></div></div>';
+    rf.style.border='2px solid rgba(122,92,58,.2)';
+    rf.querySelector('div').innerHTML='<div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(122,92,58,.3);background:transparent;flex-shrink:0;margin-top:2px"></div>';
+  } else {
+    rf.style.border='2px solid var(--red)';
+    rf.querySelector('div').innerHTML='<div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--red);background:var(--red);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center"><div style="width:7px;height:7px;border-radius:50%;background:white"></div></div>';
+    rp.style.border='2px solid rgba(122,92,58,.2)';
+    rp.querySelector('div').innerHTML='<div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(122,92,58,.3);background:transparent;flex-shrink:0;margin-top:2px"></div>';
+  }
+}
+
 function genInviteLink(){
   var name=document.getElementById('cname').value.trim();
   var date=document.getElementById('pdate').value;
@@ -795,16 +850,25 @@ function genInviteLink(){
   if(wish)p.set('w',wish);
   if(max)p.set('m',max);
   if(pp)p.set('pp',pp);
-  var champOn=document.getElementById('champToggle')&&document.getElementById('champToggle').classList.contains('on');
-  if(champOn)p.set('champ','1');
-  var url=window.location.origin+window.location.pathname+'?'+p.toString();
-  document.getElementById('inviteLinkText').textContent=url;
+  if(giftRoute==='friend')p.set('champ','1');
+  p.set('pr',childPronoun);
+  var base=window.location.href.split('?')[0];
+  var url=base+'?'+p.toString();
+  // Gift URL for champion — same but without champ flag
+  var giftParams=new URLSearchParams(p.toString());
+  giftParams.delete('champ');
+  giftParams.set('gift','1');
+  window._giftUrl=base+'?'+giftParams.toString();
+  var lt=document.getElementById('inviteLinkText');
+  if(lt)lt.textContent=url;
   document.getElementById('inviteLinkBox').style.display='block';
   window._inviteUrl=url;
 }
 
 function copyInviteLink(){
-  var url=window._inviteUrl||document.getElementById('inviteLinkText').textContent;
+  var url=window._inviteUrl||'';
+  var box=document.getElementById('inviteLinkText');
+  if(box){box.textContent=url;box.style.display='block';}
   if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('Link copied!');});}
   else{var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Link copied!');}
 }
@@ -813,8 +877,8 @@ function waShare(){
   var name=document.getElementById('cname').value.trim();
   var date=document.getElementById('pdate').value;
   var loc=document.getElementById('ploc').value.trim();
-  var url=window._inviteUrl||document.getElementById('inviteLinkText').textContent;
-  var msg='Hi everyone! 🎉 We\'d love to invite you to '+name+'\'s birthday party!\n\n'+(date?'📅 '+date+'\n':'')+(loc?'📍 '+loc+'\n':'')+'\nAll the details and RSVP here:\n'+url;
+  var url=window._inviteUrl||'';
+  var msg='Hi everyone! \uD83C\uDF89 We\'d love to invite you to '+name+'\'s birthday party!\n\n'+(date?'\uD83D\uDCC5 '+date+'\n':'')+(loc?'\uD83D\uDCCD '+loc+'\n':'')+'\nAll the details and RSVP here:\n'+url;
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
 
@@ -838,10 +902,25 @@ window.addEventListener('DOMContentLoaded',function(){
     if(document.getElementById('gmax2'))document.getElementById('gmax2').textContent=max;
     if(document.getElementById('gtname'))document.getElementById('gtname').textContent=(name||'They')+' can\'t wait to celebrate with you.';
     window._guestPP=pp;
-    // Hide gift section if champion route is active
+    // Gift-only view for champion link
+    if(p.get('gift')==='1'){
+      var rsvpBtns=document.querySelector('#sguest .btn-create');
+      var declineBtn=document.querySelector('#sguest button[onclick="gDecline()"]');
+      if(rsvpBtns)rsvpBtns.style.display='none';
+      if(declineBtn)declineBtn.style.display='none';
+      var gAttending=document.getElementById('gAttending');
+      var platformMsg=document.querySelector('.s4-platform');
+      var sor=document.querySelector('#gAttending .s4-or');
+      if(gAttending)gAttending.style.display='block';
+      if(platformMsg)platformMsg.style.display='none';
+      if(sor)sor.style.display='none';
+    }
+    // Attendance-only view for champ=1 invite link
     if(p.get('champ')==='1'){
+      var platformMsg=document.querySelector('.s4-platform');
+      if(platformMsg)platformMsg.innerHTML='<div class="s4-plat-msg">'+(name||'They')+' can\'t wait to celebrate with you! \uD83C\uDF89</div>';
       var gopt=document.getElementById('gopt');
-      var sor=document.querySelector('.s4-or');
+      var sor=document.querySelector('#gAttending .s4-or');
       var spriv=document.querySelector('.s4-priv');
       if(gopt)gopt.style.display='none';
       if(sor)sor.style.display='none';
