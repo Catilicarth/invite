@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0056)file:///C:/Users/ilicca/Downloads/gift_crowd%20(31).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gift Crowd</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./Gift Crowd_files/css2" rel="stylesheet">
 <style>
 :root{--cream:#EED5AB;--pc:#E33E04;--orange:#E33E04;--pink:#CD1561;--purple:#8E2962;--red:#CF1807;--dark:#3A0A1A;--mid:#8E2962;--warm:#F7EDD8;--green:#25D366;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -204,7 +204,7 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
 <body>
 
 <div class="phone">
-  <div class="status"><span>9:41</span><span>▮▮▮ 🔋</span></div>
+  <div class="status"></div>
 
   <!-- MENU -->
   <div class="menu-overlay" id="menuOverlay">
@@ -229,7 +229,7 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
       <div class="msec-title">A group gift can also be...</div>
       <div class="mtxt">🌱 <strong>A friendship garden</strong><br>Each guest brings a small plant or seed packet. Together, everyone plants a friendship garden - a living reminder of the people who came to celebrate.</div>
       <div class="mtxt">📚 <strong>A book swap</strong><br>Guests bring a favourite book and take one home from the birthday child's collection. Stories shared, stories discovered.</div>
-      <div class="mtxt">🍎 <strong>Food for a food bank</strong><br>Each guest brings a tin or packet of food. After the party, everyone delivers it to the local food bank together.</div>
+      
       <div class="mtxt">🔧 <strong>Toy repair workshop</strong><br>Guests bring a broken toy. A repair expert helps children fix and upcycle them - creativity, sustainability, and a lot of fun.</div>
     </div>
     <div class="msec">
@@ -241,10 +241,13 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
     </div>
   </div>
 
-  <span id="e-party" style="display:none">&#x1F389;</span>
-  <span id="e-cal" style="display:none">&#x1F4C5;</span>
-  <span id="e-pin" style="display:none">&#x1F4CD;</span>
-  <span id="e-cake" style="display:none">&#x1F382;</span>
+  <div id="wa-tpl" style="display:none">Hi everyone! 🎉 We'd love to invite you to {name}'s{age}!
+
+📅 {date}
+📍 {loc}
+{note}
+All the details and RSVP here:
+{url}</div>
   <div class="scroll">
 
     <!-- SCREEN 1 -->
@@ -271,7 +274,10 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
         <div class="stitle">The invitation</div>
         <div class="ssub">Party details only.</div>
         <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:0">
+          <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:0">
           <div style="flex:1"><span class="flbl">Child's name</span><input class="fin" id="cname" placeholder="Mia" oninput="upd()" style="margin-bottom:0"></div>
+          <div style="width:70px"><span class="flbl">Age</span><input class="fin" id="cage" placeholder="7" type="number" min="1" max="18" oninput="upd()" style="margin-bottom:0;text-align:center"></div>
+          </div>
           <div style="flex-shrink:0;margin-bottom:13px"><span class="flbl">Pronoun</span>
             <div style="display:flex;gap:5px;align-items:center;margin-top:4px">
               <button id="pr-she" onclick="pickPronoun('she')" style="padding:8px 10px;border-radius:9px;border:1.5px solid var(--red);background:var(--red);color:white;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">She</button>
@@ -345,7 +351,7 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
         <!-- Option 1: Group gift -->
         <div class="wish-opt sel" id="w1" onclick="pickWish(1)">
           <div class="wish-opt-hd">
-            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#C4522A"/><rect x="10" y="28" width="60" height="18" rx="4" fill="#D94F8C"/><rect x="34" y="28" width="12" height="46" rx="2" fill="#F0D9A0"/><rect x="10" y="35" width="60" height="8" rx="2" fill="#F0D9A0"/><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#F28B3B"/><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#F28B3B"/><path d="M38,26 C31,31 20,34 24,26 C28,18 36,22 38,26 Z" fill="#D94F8C"/><path d="M42,26 C49,31 60,34 56,26 C52,18 44,22 42,26 Z" fill="#D94F8C"/><ellipse cx="40" cy="26" rx="5" ry="6" fill="#F0D9A0"/></svg></div>A group gift</div>
+            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#C4522A"></rect><rect x="10" y="28" width="60" height="18" rx="4" fill="#D94F8C"></rect><rect x="34" y="28" width="12" height="46" rx="2" fill="#F0D9A0"></rect><rect x="10" y="35" width="60" height="8" rx="2" fill="#F0D9A0"></rect><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#F28B3B"></path><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#F28B3B"></path><path d="M38,26 C31,31 20,34 24,26 C28,18 36,22 38,26 Z" fill="#D94F8C"></path><path d="M42,26 C49,31 60,34 56,26 C52,18 44,22 42,26 Z" fill="#D94F8C"></path><ellipse cx="40" cy="26" rx="5" ry="6" fill="#F0D9A0"></ellipse></svg></div>A group gift</div>
             <div class="wish-check" id="wc1">✓</div>
           </div>
           <div class="wish-expand">
@@ -361,15 +367,12 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
             </div>
             <div class="frow-gap">
               <div class="fg"><span class="flbl">Max per person (£)</span><input class="fin" style="margin-bottom:0" type="number" id="maxamt" placeholder="10" min="1" oninput="updS4()"></div>
-              <div class="fg"><span class="flbl">Currency</span><input class="fin" style="margin-bottom:0" value="GBP (£)" readonly></div>
+              <div class="fg"><span class="flbl">Currency</span><input class="fin" style="margin-bottom:0" value="GBP (£)" readonly=""></div>
             </div>
-            <div style="margin-top:12px">
-              <span class="flbl">Your PayPal.me username</span>
-              <div style="display:flex;align-items:center;margin-bottom:4px">
-                <span style="background:var(--warm);border:1.5px solid rgba(122,92,58,.2);border-right:none;border-radius:11px 0 0 11px;padding:11px 10px;font-size:12px;color:var(--mid);white-space:nowrap;line-height:1">paypal.me/</span>
-                <input class="fin" id="paypalUser" placeholder="yourusername" style="border-radius:0 11px 11px 0;border-left:none;margin-bottom:0;flex:1" autocomplete="off" autocorrect="off" autocapitalize="none">
-              </div>
-              <div style="font-size:10px;color:var(--mid);line-height:1.5">Guests pay you directly via PayPal. Their amount stays private from other guests.</div>
+            <div id="ppSection" style="margin-top:12px">
+              <span class="flbl">Your payment link</span>
+              <input class="fin" id="paypalUser" placeholder="paypal.me/you  or  revolut.me/you  or  monzo.me/you" autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:4px">
+              <div style="font-size:10px;color:var(--mid);line-height:1.5">Works with PayPal.me, Revolut.me, Monzo.me or any payment link. Guests pay you directly — amounts stay private.</div>
             </div>
             <div class="charity-note">
               <div class="charity-note-txt"><em>Optional:</em> If more is raised than needed, send the surplus to a charity of your child's choice.</div>
@@ -385,10 +388,10 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
           </div>
         </div>
 
-        <!-- Option 2: Something else -->
+        <!-- Option 2: Alternative ideas -->
         <div class="wish-opt" id="w2" onclick="pickWish(2)">
           <div class="wish-opt-hd">
-            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40,38)"><rect x="-8" y="-30" width="16" height="44" rx="3" fill="#F28B3B"/><rect x="-8" y="-30" width="16" height="10" rx="3" fill="#D94F8C"/><rect x="-8" y="10" width="16" height="7" rx="0" fill="#3D2060"/><rect x="-8" y="17" width="16" height="9" rx="2" fill="#D94F8C"/><polygon points="0,36 -8,26 8,26" fill="#F0D9A0"/><polygon points="0,36 -3,28 3,28" fill="#3D2060"/><rect x="-2" y="-30" width="4" height="40" rx="2" fill="#F0D9A0" opacity="0.35"/></g></svg></div>Something else</div>
+            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40,38)"><rect x="-8" y="-30" width="16" height="44" rx="3" fill="#F28B3B"></rect><rect x="-8" y="-30" width="16" height="10" rx="3" fill="#D94F8C"></rect><rect x="-8" y="10" width="16" height="7" rx="0" fill="#3D2060"></rect><rect x="-8" y="17" width="16" height="9" rx="2" fill="#D94F8C"></rect><polygon points="0,36 -8,26 8,26" fill="#F0D9A0"></polygon><polygon points="0,36 -3,28 3,28" fill="#3D2060"></polygon><rect x="-2" y="-30" width="4" height="40" rx="2" fill="#F0D9A0" opacity="0.35"></rect></g></svg></div>Alternative ideas</div>
             <div class="wish-check" id="wc2"></div>
           </div>
           <div class="wish-expand">
@@ -426,10 +429,15 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
 
           <div id="inviteLinkBox" style="display:none;margin-bottom:4px">
             <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Step 2 — Send it to parents</div>
-            <button class="btn-green" onclick="waShare()" style="background:#25D366;color:white;font-size:15px;padding:14px">💬 Send invite on WhatsApp</button>
+            <button class="btn-green" onclick="waShare()" style="background:#25D366;color:white;font-size:15px;padding:14px">📋 Copy invite message</button>
+            <div id="waCopied" style="display:none"></div>
+            <div id="wa-confirm" style="display:none;margin-top:14px;background:var(--warm);border-radius:12px;padding:14px 16px">
+              <div style="font-size:12px;color:var(--mid);margin-bottom:10px">Message copied — open WhatsApp and paste it. Once sent, tap below.</div>
+              <button class="btn-green" style="margin-bottom:8px" onclick="confirmSent()">✓ Invite sent</button>
+            </div>
           </div>
 
-          <button class="btn-cream" style="margin-bottom:32px;margin-top:8px" onclick="go(4)">Done →</button>
+          
         </div>
       </div>
     </div>
@@ -441,7 +449,7 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
       </div>
       <div class="s4-banner">
         <div class="s4-chk">✓</div>
-        <div class="s4-conf"><strong>Your invite is ready 🎉</strong><span id="s4name2"></span></div>
+        <div class="s4-conf"><strong>You're all set 🎉</strong><span id="s4name2"></span></div>
       </div>
       <div class="s4-body">
         <div style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px;text-align:center">
@@ -459,15 +467,27 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
               <span class="flbl">Champion's name</span>
               <input class="fin" id="champName" placeholder="Emma" style="margin-bottom:10px" oninput="updChamp()">
               <span class="flbl">Their phone or WhatsApp</span>
-              <input class="fin" id="champPhone" placeholder="+44 7700..." style="margin-bottom:0" oninput="updChamp()">
+              <input class="fin" id="champPhone" placeholder="+44 7700..." style="margin-bottom:10px" oninput="updChamp()">
+              <span class="flbl">Their payment link</span>
+              <input class="fin" id="champPayPal" placeholder="paypal.me/... or revolut.me/... or monzo.me/..." autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:4px" oninput="updChamp()">
+              <div style="font-size:10px;color:var(--mid);line-height:1.5;margin-bottom:10px">Parents pay your friend directly — amounts stay private.</div>
             </div>
             <div class="champ-msg-box">
               <div class="champ-msg-hd"><div class="champ-msg-ico">💬</div><div class="champ-msg-lbl">Champion's WhatsApp message</div></div>
               <textarea class="champ-msg-ta" id="champMsgTa" rows="5"></textarea>
             </div>
             <p class="champ-note">Your friend will be able to see who has confirmed attendance.</p>
-            <button class="btn-green" style="margin-bottom:8px" onclick="cpChamp()">📋 Copy champion message</button>
-            <a id="champWaLink" href="#" target="_blank" class="btn-green" style="display:none;margin-bottom:8px;text-decoration:none;text-align:center;padding:11px;font-size:14px;font-weight:700;border-radius:13px;color:#5A1040;background:#F5A878">Send to <span id="champWaName">your friend</span> on WhatsApp →</a>
+            <button id="champWaLink" onclick="cpChampMsg()" class="btn-green" style="display:none;margin-bottom:8px">📋 Copy message for <span id="champWaName">your friend</span></button>
+            <div id="champCopied" style="display:none"></div>
+            <div id="champ-confirm" style="display:none;margin-top:14px;background:var(--warm);border-radius:12px;padding:14px 16px">
+              <div style="font-size:12px;color:var(--mid);margin-bottom:10px">Message copied — open WhatsApp and paste it to your friend. Once sent, tap below.</div>
+              <button class="btn-green" style="margin-bottom:8px" onclick="confirmChampSent()">✓ Message sent</button>
+            </div>
+            <div id="champ-done" style="display:none;background:var(--warm);border-radius:12px;padding:16px;text-align:center;margin-top:12px">
+              <div style="font-size:28px;margin-bottom:6px">🎉</div>
+              <div style="font-size:14px;font-weight:700;color:var(--purple)">You're all set!</div>
+              <div style="font-size:12px;color:var(--mid);margin-top:4px;line-height:1.6">Your friend will reach out to parents about the group gift.</div>
+            </div>
             <p class="champ-note" style="margin-top:6px">They receive the message in their voice. They can edit and send it to the parent group whenever they're ready.</p>
           </div>
         </div>
@@ -500,7 +520,7 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
           <div class="s4-or" style="margin-bottom:12px;">You can also</div>
           <div class="s4-opt" id="gopt" onclick="gSel()">
             <div class="s4-opt-hd">
-              <div class="s4-opt-name"><div class="s4-opt-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#CF1807"/><rect x="10" y="28" width="60" height="18" rx="4" fill="#CD1561"/><rect x="34" y="28" width="12" height="46" rx="2" fill="#EED5AB"/><rect x="10" y="35" width="60" height="8" rx="2" fill="#EED5AB"/><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#E33E04"/><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#E33E04"/><ellipse cx="40" cy="26" rx="5" ry="6" fill="#EED5AB"/></svg></div><span>Join the group gift</span></div>
+              <div class="s4-opt-name"><div class="s4-opt-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#CF1807"></rect><rect x="10" y="28" width="60" height="18" rx="4" fill="#CD1561"></rect><rect x="34" y="28" width="12" height="46" rx="2" fill="#EED5AB"></rect><rect x="10" y="35" width="60" height="8" rx="2" fill="#EED5AB"></rect><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#E33E04"></path><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#E33E04"></path><ellipse cx="40" cy="26" rx="5" ry="6" fill="#EED5AB"></ellipse></svg></div><span>Join the group gift</span></div>
               <div class="s4-chkbox" id="gchk"></div>
             </div>
             <div class="s4-opt-desc">Mia has her heart set on <span id="gwish">a bike</span>. Maximum £<span id="gmax">10</span> each.</div>
@@ -591,7 +611,7 @@ function go(n){
     var champSect=document.getElementById('champSection');
     if(giftRoute==='friend'){
       if(champSect)champSect.style.display='block';
-      updChamp();
+      if(window._giftUrl)updChamp();
     } else {
       if(champSect)champSect.style.display='none';
     }
@@ -652,7 +672,7 @@ function upd(){
   const note=document.getElementById('personalNote')?document.getElementById('personalNote').value:'';
   const noteHtml=note?'<br>'+note:'';
   const url=window._inviteUrl||'(generate your link in the gift setup step)';
-  document.getElementById('wamsg').innerHTML=n+' is turning 10! 🎂'+noteHtml+'<br>All the details and RSVP here: <span class="wa-lnk" style="pointer-events:none;opacity:.8;">'+url+'</span>';
+  var age=document.getElementById('cage')?document.getElementById('cage').value:'';var ageStr=age?' is turning '+age+'!':"'s birthday party!";document.getElementById('wamsg').innerHTML=n+ageStr+' 🎂'+noteHtml+'<br>All the details and RSVP here: <span class="wa-lnk" style="pointer-events:none;opacity:.8;">'+url+'</span>';
 }
 function cp(){
   const n=document.getElementById('cname').value||'';
@@ -662,7 +682,7 @@ function cp(){
   const note=document.getElementById('personalNote')?document.getElementById('personalNote').value:'';
   const url=window._inviteUrl||'(generate your invite link first)';
   const ds=d?new Date(d).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}):d;
-  let msg=n+' is turning 10! 🎂';
+  var age=document.getElementById('cage')?document.getElementById('cage').value:'';var ageStr=age?' is turning '+age+'!':"'s birthday!";let msg=n+ageStr+' 🎂';
   if(note)msg+='\n'+note;
   if(ds)msg+='\n📅 '+ds;
   if(t)msg+='\n⏰ '+t;
@@ -751,22 +771,40 @@ function updChamp(){
   const pronoun=childPronoun==='he'?'He':childPronoun==='they'?'They':'She';
   const line2=getPronounVerb()+' been dreaming about ' + wish + '.';
   const line3='It would be lovely to make it happen as a group - totally optional, max \u00A3' + max + ' each, all anonymous.';
-  const line4='Here' + "'" + 's the link if you' + "'" + 'd like to join in: '+(window._giftUrl||window._inviteUrl||'(generate your invite link first)');
+  const line4='Here\'s the link to join the group gift: '+(window._giftUrlBase||window._giftUrl||'(generate your invite link first)');
   const msg = line1 + '\n' + line2 + '\n' + line3 + '\n' + line4;
   document.getElementById('champMsgTa').value = msg;
   const champNameEl = document.getElementById('champWaName');
   const champNameVal = document.getElementById('champName').value||'your friend';
   if(champNameEl) champNameEl.textContent = champNameVal;
-  const phone = (document.getElementById('champPhone').value||'').replace(/[^0-9+]/g,'');
+  // Build gift URL with champion's PayPal
+  var champPP=(document.getElementById('champPayPal')?document.getElementById('champPayPal').value.trim().replace(/\s/g,''):'');
+  var giftBase=window._giftUrlBase||window._giftUrl||'(generate your invite link first)';
+  var giftLink=giftBase+(champPP&&giftBase.indexOf('(generate')===-1?'&pp='+encodeURIComponent(champPP):'');
+  window._giftUrl=giftLink;
   const waLink = document.getElementById('champWaLink');
   if(waLink){
-    if(phone){
-      waLink.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
-      waLink.style.display='block';
-    } else {
-      waLink.style.display='none';
-    }
+    window._champMsg=msg.replace(line4,'Here\'s the link to join the group gift: '+giftLink);
+    waLink.style.display='block';
   }
+}
+function cpChampMsg(){
+  var msg=window._champMsg||'';
+  if(!msg)return;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(msg).then(function(){
+      document.getElementById('champ-confirm').style.display='block';
+    });
+  } else {
+    var ta=document.createElement('textarea');
+    ta.value=msg;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    document.getElementById('champ-confirm').style.display='block';
+  }
+}
+function confirmChampSent(){
+  document.getElementById('champ-confirm').style.display='none';
+  document.getElementById('champCopied').style.display='none';
+  document.getElementById('champ-done').style.display='block';
 }
 function cpChamp(){
   const ta=document.getElementById('champMsgTa');
@@ -818,7 +856,7 @@ function gContribute(){
   var urlParams=new URLSearchParams(window.location.search);
   var ppParam=urlParams.get('pp')||ppUser;
   if(ppParam&&amt&&parseFloat(amt)>0){
-    window.open('https://www.paypal.me/'+ppParam+'/'+amt+'GBP','_blank');
+    var link=ppParam.startsWith('http')?ppParam:'https://'+ppParam;window.open(link,'_blank');
   }
   document.getElementById('gAttending').style.display='none';
   document.getElementById('gThanks').style.display='block';
@@ -830,6 +868,8 @@ function pickRoute(r){
   giftRoute=r;
   var rp=document.getElementById('routePlatform');
   var rf=document.getElementById('routeFriend');
+  var ppSect=document.getElementById('ppSection');
+  if(ppSect)ppSect.style.display=r==='friend'?'none':'block';
   if(r==='platform'){
     rp.style.border='2px solid var(--red)';
     rp.querySelector('div').innerHTML='<div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--red);background:var(--red);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center"><div style="width:7px;height:7px;border-radius:50%;background:white"></div></div>';
@@ -843,6 +883,10 @@ function pickRoute(r){
   }
 }
 
+function confirmSent(){
+  document.getElementById('wa-confirm').style.display='none';
+  go(4);
+}
 function genInviteLink(){
   var name=document.getElementById('cname').value.trim();
   var date=document.getElementById('pdate').value;
@@ -852,7 +896,7 @@ function genInviteLink(){
   var max=document.getElementById('maxamt').value;
   var pp=(document.getElementById('paypalUser').value||'').trim().replace(/\s/g,'');
   if(!name){alert('Please enter your child\'s name first.');return;}
-  if(!pp){alert('Please enter your PayPal.me username so guests can contribute.');return;}
+  if(giftRoute==='platform'&&!pp){alert('Please enter your payment link so guests can contribute.');return;}
   var p=new URLSearchParams();
   if(name)p.set('n',name);
   if(date)p.set('d',date);
@@ -860,16 +904,20 @@ function genInviteLink(){
   if(loc)p.set('l',loc);
   if(wish)p.set('w',wish);
   if(max)p.set('m',max);
-  if(pp)p.set('pp',pp);
+  if(giftRoute==='platform'&&pp)p.set('pp',pp);
+  var age=(document.getElementById('cage')?document.getElementById('cage').value:'')||'';
+  if(age)p.set('a',age);
   if(giftRoute==='friend')p.set('champ','1');
   p.set('pr',childPronoun);
   var base=window.location.href.split('?')[0];
   var url=base+'?'+p.toString();
-  // Gift URL for champion — same but without champ flag
+  // Gift URL for champion — without champ, without host pp, with gift=1
   var giftParams=new URLSearchParams(p.toString());
   giftParams.delete('champ');
+  giftParams.delete('pp');
   giftParams.set('gift','1');
-  window._giftUrl=base+'?'+giftParams.toString();
+  window._giftUrlBase=base+'?'+giftParams.toString();
+  window._giftUrl=window._giftUrlBase;
   var lt=document.getElementById('inviteLinkText');
   if(lt)lt.textContent=url;
   document.getElementById('inviteLinkBox').style.display='block';
@@ -886,14 +934,26 @@ function copyInviteLink(){
 
 function waShare(){
   var name=document.getElementById('cname').value.trim()||'';
+  var age=document.getElementById('cage')?document.getElementById('cage').value.trim():'';
   var date=document.getElementById('pdate').value||'';
   var loc=document.getElementById('ploc').value.trim()||'';
+  var note=document.getElementById('personalNote')?document.getElementById('personalNote').value.trim():'';
   var url=window._inviteUrl||'';
-  var msg='Hi everyone! '+E.party+' We\'d love to invite you to '+name+'\'s birthday party!\n\n'
-    +(date?E.cal+' '+date+'\n':'')
-    +(loc?E.pin+' '+loc+'\n':'')
-    +'\nAll the details and RSVP here:\n'+url;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  var tpl=document.getElementById('wa-tpl').textContent;
+  function getOrdinal(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+  var ageStr=age?' '+getOrdinal(parseInt(age))+' birthday party':' birthday party';
+  var msg=tpl.replace('{name}',name).replace('{age}',ageStr).replace('{date}',date).replace('{loc}',loc).replace('{note}',note?'\n'+note:'').replace('{url}',url);
+  if(!date)msg=msg.replace(/\n[^\n]*\{date\}[^\n]*/,'');
+  if(!loc)msg=msg.replace(/\n[^\n]*\{loc\}[^\n]*/,'');
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(msg).then(function(){
+      document.getElementById('wa-confirm').style.display='block';
+    });
+  } else {
+    var ta=document.createElement('textarea');
+    ta.value=msg;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    document.getElementById('wa-confirm').style.display='block';
+  }
 }
 
 /* ---- Load guest view from URL params on page load ---- */
@@ -955,12 +1015,12 @@ window.addEventListener('DOMContentLoaded',function(){
     var amt=amtIn?amtIn.value:'';
     var pp=window._guestPP||'';
     if(pp&&amt&&parseFloat(amt)>0){
-      window.open('https://www.paypal.me/'+pp+'/'+amt+'GBP','_blank');
+      var link=pp.startsWith('http')?pp:'https://'+pp;window.open(link,'_blank');
     }
     document.getElementById('gAttending').style.display='none';
     document.getElementById('gThanks').style.display='block';
   };
 });
 </script>
-</body>
-</html>
+
+</body></html>
