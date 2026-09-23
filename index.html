@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0056)file:///C:/Users/ilicca/Downloads/gift_crowd%20(31).html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gift Crowd</title>
-<link href="./Gift Crowd_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#EED5AB;--pc:#E33E04;--orange:#E33E04;--pink:#CD1561;--purple:#8E2962;--red:#CF1807;--dark:#3A0A1A;--mid:#8E2962;--warm:#F7EDD8;--green:#25D366;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -241,10 +241,11 @@ body{background:#1A0E06;min-height:100vh;display:flex;flex-direction:column;alig
     </div>
   </div>
 
-  <div id="wa-tpl" style="display:none">Hi everyone! 🎉 We'd love to invite you to {name}'s{age}!
+  <div id="rsvp-tpl" style="display:none">Hi! I've just confirmed my attendance at {name}'s party{date}. See you there! &#x1F389;</div>
+  <div id="wa-tpl" style="display:none">Hi everyone! &#x1F389; We'd love to invite you to {name}'s{age}!
 
-📅 {date}
-📍 {loc}
+&#x1F4C5; {date}
+&#x1F4CD; {loc}
 {note}
 All the details and RSVP here:
 {url}</div>
@@ -292,6 +293,9 @@ All the details and RSVP here:
         </div>
         <span class="flbl">Location</span>
         <input class="fin" id="ploc" placeholder="Ashton Gate Park, Bristol" oninput="upd()">
+        <span class="flbl">Your WhatsApp number</span>
+        <input class="fin" id="pphone" placeholder="+44 7700..." type="tel" oninput="upd()">
+        <div style="font-size:10px;color:var(--mid);margin-top:-8px;margin-bottom:14px;line-height:1.5">Guests will send their RSVP confirmation directly to you on WhatsApp.</div>
         <span class="flbl">RSVP by</span>
         <input class="fin" id="rsvp" type="date">
         <div class="avatar-section">
@@ -351,7 +355,7 @@ All the details and RSVP here:
         <!-- Option 1: Group gift -->
         <div class="wish-opt sel" id="w1" onclick="pickWish(1)">
           <div class="wish-opt-hd">
-            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#C4522A"></rect><rect x="10" y="28" width="60" height="18" rx="4" fill="#D94F8C"></rect><rect x="34" y="28" width="12" height="46" rx="2" fill="#F0D9A0"></rect><rect x="10" y="35" width="60" height="8" rx="2" fill="#F0D9A0"></rect><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#F28B3B"></path><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#F28B3B"></path><path d="M38,26 C31,31 20,34 24,26 C28,18 36,22 38,26 Z" fill="#D94F8C"></path><path d="M42,26 C49,31 60,34 56,26 C52,18 44,22 42,26 Z" fill="#D94F8C"></path><ellipse cx="40" cy="26" rx="5" ry="6" fill="#F0D9A0"></ellipse></svg></div>A group gift</div>
+            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#C4522A"/><rect x="10" y="28" width="60" height="18" rx="4" fill="#D94F8C"/><rect x="34" y="28" width="12" height="46" rx="2" fill="#F0D9A0"/><rect x="10" y="35" width="60" height="8" rx="2" fill="#F0D9A0"/><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#F28B3B"/><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#F28B3B"/><path d="M38,26 C31,31 20,34 24,26 C28,18 36,22 38,26 Z" fill="#D94F8C"/><path d="M42,26 C49,31 60,34 56,26 C52,18 44,22 42,26 Z" fill="#D94F8C"/><ellipse cx="40" cy="26" rx="5" ry="6" fill="#F0D9A0"/></svg></div>A group gift</div>
             <div class="wish-check" id="wc1">✓</div>
           </div>
           <div class="wish-expand">
@@ -367,7 +371,7 @@ All the details and RSVP here:
             </div>
             <div class="frow-gap">
               <div class="fg"><span class="flbl">Max per person (£)</span><input class="fin" style="margin-bottom:0" type="number" id="maxamt" placeholder="10" min="1" oninput="updS4()"></div>
-              <div class="fg"><span class="flbl">Currency</span><input class="fin" style="margin-bottom:0" value="GBP (£)" readonly=""></div>
+              <div class="fg"><span class="flbl">Currency</span><input class="fin" style="margin-bottom:0" value="GBP (£)" readonly></div>
             </div>
             <div id="ppSection" style="margin-top:12px">
               <span class="flbl">Your payment link</span>
@@ -391,7 +395,7 @@ All the details and RSVP here:
         <!-- Option 2: Alternative ideas -->
         <div class="wish-opt" id="w2" onclick="pickWish(2)">
           <div class="wish-opt-hd">
-            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40,38)"><rect x="-8" y="-30" width="16" height="44" rx="3" fill="#F28B3B"></rect><rect x="-8" y="-30" width="16" height="10" rx="3" fill="#D94F8C"></rect><rect x="-8" y="10" width="16" height="7" rx="0" fill="#3D2060"></rect><rect x="-8" y="17" width="16" height="9" rx="2" fill="#D94F8C"></rect><polygon points="0,36 -8,26 8,26" fill="#F0D9A0"></polygon><polygon points="0,36 -3,28 3,28" fill="#3D2060"></polygon><rect x="-2" y="-30" width="4" height="40" rx="2" fill="#F0D9A0" opacity="0.35"></rect></g></svg></div>Alternative ideas</div>
+            <div class="wish-opt-name"><div class="wish-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40,38)"><rect x="-8" y="-30" width="16" height="44" rx="3" fill="#F28B3B"/><rect x="-8" y="-30" width="16" height="10" rx="3" fill="#D94F8C"/><rect x="-8" y="10" width="16" height="7" rx="0" fill="#3D2060"/><rect x="-8" y="17" width="16" height="9" rx="2" fill="#D94F8C"/><polygon points="0,36 -8,26 8,26" fill="#F0D9A0"/><polygon points="0,36 -3,28 3,28" fill="#3D2060"/><rect x="-2" y="-30" width="4" height="40" rx="2" fill="#F0D9A0" opacity="0.35"/></g></svg></div>Alternative ideas</div>
             <div class="wish-check" id="wc2"></div>
           </div>
           <div class="wish-expand">
@@ -449,13 +453,13 @@ All the details and RSVP here:
       </div>
       <div class="s4-banner">
         <div class="s4-chk">✓</div>
-        <div class="s4-conf"><strong>You're all set 🎉</strong><span id="s4name2"></span></div>
+        <div class="s4-conf"><strong>You're all set &#x1F389;</strong><span id="s4name2"></span></div>
       </div>
       <div class="s4-body">
         <div style="background:var(--warm);border-radius:14px;padding:16px;margin-bottom:16px;text-align:center">
           <div style="font-size:32px;margin-bottom:8px">🎉</div>
           <div style="font-size:14px;font-weight:700;color:var(--purple);margin-bottom:4px">Your invite has been sent!</div>
-          <div id="s4-msg-platform" style="font-size:12px;color:var(--mid);line-height:1.6">Parents will receive a link to RSVP and join the group gift.</div>
+          <div id="s4-msg-platform" style="font-size:12px;color:var(--mid);line-height:1.6">Parents will receive a link to RSVP and have the option to join a group gift.</div>
           <div id="s4-msg-friend" style="font-size:12px;color:var(--mid);line-height:1.6;display:none">Parents will receive all the party details. Once they confirm attendance, your friend will reach out about the group gift.</div>
         </div>
 
@@ -514,16 +518,17 @@ All the details and RSVP here:
           <button onclick="gDecline()" style="display:block;width:100%;padding:14px;background:none;border:1.5px solid var(--mid);border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--mid);cursor:pointer;">Sadly, I can't attend</button>
         </div>
         <div id="gAttending" style="display:none;">
+          <a id="rsvpWaBtn" href="#" target="_blank" style="display:none;background:#25D366;color:white;font-size:14px;font-weight:700;border-radius:13px;padding:13px;text-align:center;text-decoration:none;margin-bottom:16px;display:none;font-family:'DM Sans',sans-serif">💬 Confirm attendance on WhatsApp</a>
           <div class="s4-platform" style="margin-bottom:16px;">
             <div class="s4-plat-msg">Please bring no present. Just come and celebrate.</div>
           </div>
           <div class="s4-or" style="margin-bottom:12px;">You can also</div>
           <div class="s4-opt" id="gopt" onclick="gSel()">
             <div class="s4-opt-hd">
-              <div class="s4-opt-name"><div class="s4-opt-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#CF1807"></rect><rect x="10" y="28" width="60" height="18" rx="4" fill="#CD1561"></rect><rect x="34" y="28" width="12" height="46" rx="2" fill="#EED5AB"></rect><rect x="10" y="35" width="60" height="8" rx="2" fill="#EED5AB"></rect><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#E33E04"></path><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#E33E04"></path><ellipse cx="40" cy="26" rx="5" ry="6" fill="#EED5AB"></ellipse></svg></div><span>Join the group gift</span></div>
+              <div class="s4-opt-name"><div class="s4-opt-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#CF1807"/><rect x="10" y="28" width="60" height="18" rx="4" fill="#CD1561"/><rect x="34" y="28" width="12" height="46" rx="2" fill="#EED5AB"/><rect x="10" y="35" width="60" height="8" rx="2" fill="#EED5AB"/><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#E33E04"/><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#E33E04"/><ellipse cx="40" cy="26" rx="5" ry="6" fill="#EED5AB"/></svg></div><span>Join the group gift</span></div>
               <div class="s4-chkbox" id="gchk"></div>
             </div>
-            <div class="s4-opt-desc">Mia has her heart set on <span id="gwish">a bike</span>. Maximum £<span id="gmax">10</span> each.</div>
+            <div class="s4-opt-desc" id="goptdesc"><span id="goptname">Mia</span> has <span id="goptpronoun">her</span> heart set on <span id="gwish">a bike</span>. Maximum £<span id="gmax">10</span> each.</div>
             <div class="s4-opt-detail">
               <div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1" max="10" onclick="event.stopPropagation()"></div>
               <div class="amt-max">Maximum £<span id="gmax2">10</span> each</div>
@@ -583,7 +588,7 @@ const s4BaseHTML=`
             </div>
             <div class="s4-chkbox" id="s4chk"></div>
           </div>
-          <div class="s4-opt-desc" id="s4optdesc">Mia has her heart set on a day out at Warwick Castle. Maximum £10 each.</div>
+          <div class="s4-opt-desc" id="s4optdesc"><span id="s4optname2">them</span> has <span id="s4optpronoun">their</span> heart set on <span id="s4optwish">a gift</span>. Maximum £<span id="s4optmax">10</span> each.</div>
           <div class="s4-opt-detail" id="s4detail">
             <div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1" max="10"></div>
             <div class="amt-max">Maximum £10 each</div>
@@ -743,12 +748,15 @@ function s4sel(){
   if(chk)chk.textContent=opt.classList.contains('sel')?'✓':'';
 }
 function showThanks(){
-  const name=document.getElementById('cname').value||'Mia';
+  var urlP=new URLSearchParams(window.location.search);
+  const name=urlP.get('n')||(document.getElementById('cname')?document.getElementById('cname').value:'')||'them';
+  const pr=urlP.get('pr')||'she';
+  const pronoun=pr==='he'?'his':pr==='they'?'their':'her';
   document.getElementById('s4content').innerHTML=`
     <div class="thankyou-card" style="margin-top:20px">
       <div class="ty-av"><img src="${curAv}" alt="avatar"></div>
       <div class="ty-msg">THANK YOU SO MUCH! ${name.toUpperCase()} CAN'T WAIT TO SEE YOU 🎉</div>
-      <div class="ty-note">${name} will send you a picture of her wish come true!</div>
+      <div class="ty-note">${name} will send you a picture of ${pronoun} wish come true!</div>
     </div>
     <div class="s4-priv" style="margin-top:16px">🔒 Your choice is completely private</div>
   `;
@@ -837,6 +845,20 @@ function buildGuest(){
 function gRsvp(){
   document.getElementById('gRsvpBtns').style.display='none';
   document.getElementById('gAttending').style.display='block';
+  // Send RSVP confirmation to host via WhatsApp
+  var p=new URLSearchParams(window.location.search);
+  var hostPhone=(p.get('ph')||'').replace(/[^0-9+]/g,'');
+  var childName=p.get('n')||'the party';
+  var date=p.get('d')||'';
+  if(hostPhone){
+    var tpl=document.getElementById('rsvp-tpl');
+    var msg=tpl?tpl.textContent.replace('{name}',childName).replace('{date}',date?(' on '+date):''):'Hi! I\'ve just confirmed my attendance at '+childName+'\'s party'+( date?' on '+date:'')+'. See you there! &#x1F389;';
+    var waBtn=document.getElementById('rsvpWaBtn');
+    if(waBtn){
+      waBtn.href='https://wa.me/'+hostPhone+'?text='+encodeURIComponent(msg);
+      waBtn.style.display='block';
+    }
+  }
 }
 function gDecline(){
   document.getElementById('gRsvpBtns').style.display='none';
@@ -902,6 +924,8 @@ function genInviteLink(){
   if(date)p.set('d',date);
   if(time)p.set('t',time);
   if(loc)p.set('l',loc);
+  var phone=(document.getElementById('pphone').value||'').trim().replace(/\s/g,'');
+  if(phone)p.set('ph',phone);
   if(wish)p.set('w',wish);
   if(max)p.set('m',max);
   if(giftRoute==='platform'&&pp)p.set('pp',pp);
@@ -975,6 +999,15 @@ window.addEventListener('DOMContentLoaded',function(){
     if(document.getElementById('gmax'))document.getElementById('gmax').textContent=max;
     if(document.getElementById('gmax2'))document.getElementById('gmax2').textContent=max;
     if(document.getElementById('gtname'))document.getElementById('gtname').textContent=(name||'They')+' can\'t wait to celebrate with you.';
+    // Pronoun for gift descriptions
+    var prParam=p.get('pr')||'she';
+    var guestPronoun=prParam==='he'?'his':prParam==='they'?'their':'her';
+    if(document.getElementById('goptname'))document.getElementById('goptname').textContent=name||'Mia';
+    if(document.getElementById('goptpronoun'))document.getElementById('goptpronoun').textContent=guestPronoun;
+    if(document.getElementById('s4optname2'))document.getElementById('s4optname2').textContent=name||'them';
+    if(document.getElementById('s4optpronoun'))document.getElementById('s4optpronoun').textContent=guestPronoun;
+    if(document.getElementById('s4optwish'))document.getElementById('s4optwish').textContent=wish||'a gift';
+    if(document.getElementById('s4optmax'))document.getElementById('s4optmax').textContent=max||'10';
     window._guestPP=pp;
     // Gift-only view for champion link
     if(p.get('gift')==='1'){
@@ -1022,5 +1055,5 @@ window.addEventListener('DOMContentLoaded',function(){
   };
 });
 </script>
-
-</body></html>
+</body>
+</html>
