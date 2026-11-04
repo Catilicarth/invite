@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picture My Gift - Christmas</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#08080B;--navy2:#14141A;--gold:#E3A92B;--gold2:#F2C94C;--silver:#B9BCC2;--white:#F6EFE3;--ink:#2E2E36;--green:#25D366;--err:#A31205;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px 12px 40px;font-family:'DM Sans',sans-serif;color:var(--white);}
+.banner{width:100%;max-width:420px;background:linear-gradient(135deg,#E3A92B,#F2C94C 45%,#E3A92B);color:var(--navy);text-align:center;font-size:12px;font-weight:700;letter-spacing:.03em;padding:8px 12px;border-radius:12px;margin-bottom:12px;}
+.app{width:100%;max-width:420px;background:var(--navy);border-radius:28px;border:1px solid rgba(185,188,194,.3);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.screen{display:none;padding:0 0 28px;}
+.screen.on{display:block;}
+button,input,select,textarea{font-family:'DM Sans',sans-serif;}
+:focus-visible{outline:3px solid var(--navy);box-shadow:0 0 0 6px var(--gold2);}
+.topbar{display:flex;align-items:center;padding:14px 16px 0;}
+.back{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--silver);background:transparent;color:var(--white);font-size:18px;cursor:pointer;}
+.pad{padding:0 20px;}
+h1,h2{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.03em;text-transform:uppercase;color:var(--gold2);line-height:1.15;}
+h1{font-size:26px;margin:18px 0 8px;}
+h2{font-size:22px;margin:14px 0 8px;}
+.sub{font-size:14px;color:var(--silver);line-height:1.55;margin-bottom:16px;}
+.poster{display:block;width:100%;height:auto;background:var(--navy);}
+.hpad{padding:8px 24px 0;}
+.opt-card{display:block;width:100%;text-align:left;background:var(--navy2);border:1.5px solid rgba(185,188,194,.4);border-radius:16px;padding:14px 16px;margin-bottom:12px;cursor:pointer;color:var(--white);}
+.opt-card .oh{display:block;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold2);margin-bottom:3px;}
+.opt-card .od{display:block;font-size:14px;line-height:1.45;color:var(--silver);}
+.tagline{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--silver);text-align:center;line-height:1.2;margin:22px auto 22px;max-width:100%;text-wrap:balance;overflow-wrap:break-word;}
+.btn{display:block;width:100%;min-height:50px;padding:14px;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;text-align:center;margin-bottom:10px;color:var(--navy);background:linear-gradient(135deg,#E3A92B,#F2C94C 45%,#E3A92B);}
+.btn.line{background:transparent;color:var(--white);border:1.5px solid var(--silver);}
+.btn.wa{background:var(--green);color:#06301F;}
+.btn:disabled{opacity:.6;cursor:default;}
+.linkbtn{display:block;background:none;border:none;color:var(--silver);text-decoration:underline;font-size:14px;cursor:pointer;min-height:44px;width:100%;text-align:center;}
+.bridge{display:block;width:100%;text-align:center;text-decoration:none;margin:14px 0 0;padding:8px 12px;border-radius:12px;background:var(--silver);color:#000;font-size:15px;font-weight:700;line-height:1.3;}
+.card{background:var(--white);color:var(--ink);border-radius:18px;padding:18px 16px;margin-bottom:16px;}
+.card label,.card .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;color:var(--ink);}
+.card .opt{font-weight:500;text-transform:none;letter-spacing:0;}
+.in{width:100%;min-height:46px;padding:11px 13px;background:#fff;border:1.5px solid #8A8A94;border-radius:11px;font-size:15px;color:var(--ink);margin-bottom:14px;}
+textarea.in{min-height:70px;resize:vertical;}
+.hint{font-size:12px;line-height:1.5;color:#55555F;margin:-8px 0 14px;}
+.row{display:flex;gap:10px;}
+.row>div{flex:1;}
+.choice{display:flex;align-items:flex-start;gap:10px;min-height:44px;padding:8px 0;font-size:14px;text-transform:none;letter-spacing:0;font-weight:500;cursor:pointer;}
+.choice input{width:22px;height:22px;margin-top:1px;flex-shrink:0;accent-color:#8A5A00;}
+.err{display:none;color:var(--err);font-size:13px;font-weight:700;line-height:1.5;margin-bottom:12px;}
+.msgbox{width:100%;min-height:190px;padding:12px 13px;border-radius:12px;border:1.5px solid #8A8A94;font-size:14px;line-height:1.55;color:var(--ink);background:#fff;resize:vertical;margin-bottom:10px;}
+.note{font-size:12px;color:var(--silver);line-height:1.55;margin-bottom:12px;}
+.card .note{color:#55555F;}
+.done{display:none;background:rgba(227,169,43,.15);border:1.5px solid var(--gold);border-radius:14px;padding:14px;margin-top:14px;text-align:center;}
+.done strong{display:block;color:var(--gold2);font-size:15px;margin-bottom:4px;}
+.gift{font-family:'Anton',sans-serif;font-size:22px;color:var(--ink);line-height:1.25;margin-bottom:10px;text-transform:uppercase;letter-spacing:.02em;}
+.gmeta{font-size:14px;line-height:1.9;color:var(--ink);margin-bottom:10px;}
+.gmsg{font-size:14px;line-height:1.6;color:var(--ink);background:#EDE3CF;border-radius:12px;padding:12px 14px;margin-bottom:12px;}
+.foot{width:100%;max-width:420px;text-align:center;margin-top:14px;font-size:12px;color:var(--silver);}
+.foot button{background:none;border:none;color:var(--gold2);text-decoration:underline;font-size:14px;cursor:pointer;min-height:44px;padding:0 12px;}
+.menubtn{background:none;border:none;cursor:pointer;padding:10px 0 4px;min-height:48px;margin:4px 0 6px;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;}
+.hls{display:flex;flex-direction:column;gap:4px;}
+.hls i{display:block;width:24px;height:3px;border-radius:2px;}
+.hls i:nth-child(1){background:#F2C94C;}.hls i:nth-child(2){background:#B9BCC2;}.hls i:nth-child(3){background:#F6EFE3;}.hls i:nth-child(4){background:#E3A92B;}
+.menutxt{font-family:'Anton',sans-serif;font-size:24px;letter-spacing:.06em;color:var(--white);text-transform:uppercase;}
+/* MENU */
+.menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:100;overflow-y:auto;}
+.menu.open{display:block;}
+.menu-in{max-width:420px;margin:0 auto;padding:0 20px 40px;}
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 0 12px;border-bottom:1px solid rgba(185,188,194,.3);}
+.mlogo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold2);flex:1;}
+.mbtn{width:44px;height:44px;border-radius:50%;border:none;background:transparent;color:var(--white);font-size:22px;cursor:pointer;}
+.mitem{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:60px;padding:14px 0;background:none;border:none;border-bottom:1px solid rgba(185,188,194,.2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;color:var(--gold2);text-align:left;}
+.mitem:last-of-type{border-bottom:none;}
+.mitem span:last-child{font-size:22px;font-weight:400;}
+.mpage{display:none;}
+.mpage.on{display:block;}
+.mtxt{font-size:14px;line-height:1.7;margin:14px 0;color:var(--white);}
+.mtxt strong{color:var(--gold2);}
+.mcopy{margin-top:24px;text-align:center;font-size:12px;color:var(--silver);}
+.mstep{display:flex;gap:12px;margin:14px 0;font-size:14px;line-height:1.6;}
+.mn{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu a{color:var(--gold2);}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HOME -->
+  <div class="screen on" id="sHome">
+    <img class="poster" src="https://cdn.jsdelivr.net/gh/Catilicarth/invite@main/christmas/poster.jpg" alt="Picture My Gift Christmas poster, with a gold and silver gift made of little festive pictures" onerror="this.style.display='none'">
+    <div class="hpad">
+      <div class="tagline">Christmas group gifts, made simple</div>
+      <button class="btn" onclick="show('sChoose')">Let's start!</button>
+      <button class="menubtn" onclick="openMenu()"><span class="hls"><i></i><i></i><i></i><i></i></span><span class="menutxt">Menu</span></button>
+      <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
+    </div>
+  </div>
+
+  <!-- CHOOSE -->
+  <div class="screen" id="sChoose">
+    <div class="topbar"><button class="back" onclick="show('sHome')" aria-label="Back">&larr;</button></div>
+    <div class="pad">
+      <h1>Who are you collecting a gift for?</h1>
+      <p class="sub">Choose the one that fits best. You can change the wording later.</p>
+      <button class="opt-card" onclick="startSetup('teacher')"><span class="oh">At school</span><span class="od">A teacher or someone else at school</span></button>
+      <button class="opt-card" onclick="startSetup('family')"><span class="oh">At a family gathering</span><span class="od">Your little one or another family member</span></button>
+      <button class="opt-card" onclick="startSetup('work')"><span class="oh">At work</span><span class="od">A colleague</span></button>
+      <button class="opt-card" onclick="startSetup('other')"><span class="oh">Something else</span><span class="od">Any other occasion or group gift</span></button>
+    </div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="screen" id="sSetup">
+    <div class="topbar"><button class="back" onclick="show('sChoose')" aria-label="Back">&larr;</button></div>
+    <div class="pad">
+      <h1 id="setupTitle">A gift for a teacher</h1>
+      <p class="sub">A few details, then you will get a message ready to send to your group chat.</p>
+      <div class="card">
+        <label for="fN" id="lN">Teacher's name</label>
+        <input class="in" id="fN" maxlength="40" autocomplete="off">
+
+        <label for="fG">Gift idea</label>
+        <input class="in" id="fG" maxlength="100" autocomplete="off">
+
+        <div id="famOnly" style="display:none">
+          <span class="lbl" id="kindLbl">Which message suits you?</span>
+          <div role="group" aria-labelledby="kindLbl" style="margin-bottom:10px">
+            <label class="choice"><input type="radio" name="kind" value="wish" checked><span>The child's wish: the gift is something they have asked for</span></label>
+            <label class="choice"><input type="radio" name="kind" value="surprise"><span>A surprise from the grown-ups</span></label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div><label for="fC">Costs about <span class="opt">(optional)</span></label><input class="in" id="fC" type="number" min="1" inputmode="decimal" placeholder="&pound;60"></div>
+          <div><label for="fM">Up to each</label><input class="in" id="fM" type="number" min="1" inputmode="decimal" placeholder="&pound;10"></div>
+        </div>
+
+        <label for="fP">Your payment link</label>
+        <input class="in" id="fP" placeholder="paypal.me/you or revolut.me/you or monzo.me/you" autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:6px">
+        <p class="hint">Guests pay you directly. We never handle money.</p>
+
+        <label for="fD">Contribute by <span class="opt">(optional)</span></label>
+        <input class="in" id="fD" type="date">
+
+        <label for="fMsg">A Christmas message for guests <span class="opt">(optional)</span></label>
+        <textarea class="in" id="fMsg" maxlength="200" placeholder="Thank you for being part of this!"></textarea>
+
+        <label for="fCh">If more is raised than needed <span class="opt">(optional)</span></label>
+        <select class="in" id="fCh" onchange="chOther()" style="margin-bottom:10px">
+          <option value="">No charity</option>
+          <option>NSPCC</option>
+          <option>Save the Children</option>
+          <option>Children in Need</option>
+          <option>RSPCA</option>
+          <option>Children's Cancer Research Fund</option>
+          <option value="__own">Another charity...</option>
+        </select>
+        <input class="in" id="fChOwn" maxlength="60" placeholder="Name of the charity" aria-label="Name of the charity" style="display:none">
+        <p class="hint" style="margin-top:0">This is your plan for any surplus. The app cannot pass money on for you.</p>
+
+        <div id="teachOnly">
+          <label class="choice"><input type="checkbox" id="fCard"><span>Add a line about a card (I will add everyone's name)</span></label>
+        </div>
+
+        <div class="err" id="formErr" role="alert"></div>
+        <button class="btn" onclick="toCheck()" style="margin-bottom:0">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECK -->
+  <div class="screen" id="sCheck">
+    <div class="topbar"><button class="back" onclick="show('sSetup')" aria-label="Back">&larr;</button></div>
+    <div class="pad">
+      <h1>Check your payment link</h1>
+      <p class="sub">A mistake here cannot be corrected once the link is sent. Please check it.</p>
+      <div class="card">
+        <span class="lbl">Guests will be sent to</span>
+        <p id="chkHost" style="font-weight:700;font-size:16px;margin-bottom:4px"></p>
+        <p id="chkFull" style="font-size:12px;line-height:1.5;word-break:break-all;color:#55555F;margin-bottom:16px"></p>
+        <button class="btn line" onclick="testLink()" style="color:var(--ink);border-color:#8A8A94">Test my payment link</button>
+        <button class="btn" onclick="buildShare()" style="margin-bottom:0">Looks right, continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div class="screen" id="sShare">
+    <div class="topbar"><button class="back" onclick="show('sCheck')" aria-label="Back">&larr;</button></div>
+    <div class="pad">
+      <h1>Send it to your group</h1>
+      <p class="sub">Feel free to edit this so it sounds like you.</p>
+      <label for="shareMsg" class="note" style="display:block;margin-bottom:6px">Your message</label>
+      <textarea class="msgbox" id="shareMsg"></textarea>
+      <button class="btn wa" onclick="openWa()">Open WhatsApp with the message ready</button>
+      <button class="linkbtn" onclick="copyMsg()">Use another app? Copy the message instead.</button>
+      <div class="note" id="copied" style="display:none;text-align:center">Copied. Paste it in your other app.</div>
+      <button class="linkbtn" onclick="previewGuest()">See what guests will see</button>
+      <button class="btn" id="sentBtn" onclick="markSent()" style="margin-top:12px">I have sent it</button>
+      <div class="done" id="shareDone" role="status"><strong>You're all set</strong><span style="font-size:14px;line-height:1.5">Guests tap the link and choose whether to contribute. Nothing is stored, so there is nothing more to do.</span></div>
+      <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
+    </div>
+  </div>
+
+  <!-- GUEST -->
+  <div class="screen" id="sGuest">
+    <div class="pad">
+      <h1 id="gTitle">A Christmas gift</h1>
+      <div class="card" id="gBody"></div>
+      <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
+      <button class="linkbtn" onclick="openMenu()" style="margin-top:6px">About this page</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot"><button onclick="openMenuPage('mp-privacy')">Privacy</button></div>
+
+<!-- MENU -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="menu-in">
+    <div id="mHome">
+      <div class="mhead"><div class="mlogo">Picture My Gift</div><button class="mbtn" id="mClose" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <button class="mitem" onclick="openMenuPage('mp-about')"><span>About Christmas group gifts</span><span aria-hidden="true">&rsaquo;</span></button>
+      <button class="mitem" onclick="openMenuPage('mp-how')"><span>How it works</span><span aria-hidden="true">&rsaquo;</span></button>
+      <button class="mitem" onclick="openMenuPage('mp-privacy')"><span>Privacy</span><span aria-hidden="true">&rsaquo;</span></button>
+      <button class="mitem" onclick="openMenuPage('mp-faq')"><span>FAQ</span><span aria-hidden="true">&rsaquo;</span></button>
+      <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
+      <div class="mcopy">&copy; 2026 Catherine Ilic</div>
+    </div>
+
+    <div class="mpage" id="mp-about">
+      <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">About</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mtxt">At Christmas, children can end up with more presents than they can enjoy. Parents I spoke to said they would welcome something simpler.</div>
+      <div class="mtxt">For a child, one shared gift can mean more than a pile of small ones. For a teacher, a group gift keeps things simple: one present from the class, with no collection list and no envelope of cash.</div>
+      <div class="mtxt">This page is for the parent or relative who organises it. You set up the gift, share one message in your group chat, and guests pay you directly.</div>
+      <div class="mtxt">It is a free trial. It grew out of my master's research at the London Interdisciplinary School, and it is the Christmas cousin of the birthday kit.</div>
+    </div>
+
+    <div class="mpage" id="mp-how">
+      <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">How it works</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mstep"><div class="mn">1</div><div><strong>Choose who the gift is for.</strong> Someone at school, a family member, a colleague, or anyone else.</div></div>
+      <div class="mstep"><div class="mn">2</div><div><strong>Add the gift idea and your payment link.</strong></div></div>
+      <div class="mstep"><div class="mn">3</div><div><strong>Check your payment link.</strong> Once the link is sent, it cannot be changed.</div></div>
+      <div class="mstep"><div class="mn">4</div><div><strong>Send the ready-made message to your group chat.</strong> The message is a template. Change it however you like before you send it, so it sounds like you.</div></div>
+      <div class="mtxt">Guests tap the link and choose whether to contribute. If they would rather not, they simply don't. Nobody is asked why.</div>
+    </div>
+
+    <div class="mpage" id="mp-privacy">
+      <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">Privacy</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mtxt"><strong>Everything is in the link.</strong> We store nothing: no names, no photos, no payment details, no cookies, no analytics.</div>
+      <div class="mtxt">The link is as private as the chat you share it in. For a child's gift, please use a first name only.</div>
+      <div class="mtxt">The page loads its fonts from Google Fonts and its picture from jsDelivr, so those services can see that the page was opened.</div>
+      <div class="mtxt">Questions? Write to <a href="mailto:hello@picturemygift.com">hello@picturemygift.com</a>.</div>
+    </div>
+
+    <div class="mpage" id="mp-faq">
+      <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">FAQ</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mtxt"><strong>Does the money go through this app?</strong><br>No. Guests pay your own payment link directly.</div>
+      <div class="mtxt"><strong>What if someone prefers not to join?</strong><br>They don't reply or pay. Nothing is tracked.</div>
+      <div class="mtxt"><strong>Who sees what people give?</strong><br>Other guests can't. You may see payments in your own payment account.</div>
+      <div class="mtxt"><strong>What if more is raised than needed?</strong><br>It is up to you. If you named a charity, you can pass the surplus on. This app can't do it for you.</div>
+      <div class="mtxt"><strong>Is there a target amount?</strong><br>Optional. It is information only, because the app can't see what has been paid.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var D={};
+var TREE='\uD83C\uDF84';
+var POUND='\u00A3';
+var SCREENS=['sHome','sChoose','sSetup','sCheck','sShare','sGuest'];
+
+function $(id){return document.getElementById(id);}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
+function show(id){
+  SCREENS.forEach(function(s){$(s).classList.toggle('on',s===id);});
+  window.scrollTo(0,0);
+}
+
+/* ---- Setup ---- */
+var KINDS={
+  teacher:{title:'A gift for a teacher',lab:"Teacher's name",ph:'Ms Patel',gph:'A garden centre voucher',err:"Please add the teacher's name.",card:true},
+  family:{title:'A gift for a child',lab:"Child's first name",ph:'Mia',gph:'A balance bike',err:"Please add the child's first name.",card:false},
+  work:{title:'A gift for a colleague',lab:"Colleague's first name",ph:'Sam',gph:'A bottle of something nice',err:"Please add your colleague's first name.",card:true},
+  other:{title:'A group gift',lab:'Who is it for?',ph:'Grandma Rose',gph:'A weekend away',err:'Please say who the gift is for.',card:false}
+};
+function startSetup(t){
+  D.type=t;
+  var k=KINDS[t]||KINDS.other;
+  $('setupTitle').textContent=k.title;
+  $('lN').textContent=k.lab;
+  $('fN').placeholder=k.ph;
+  $('fG').placeholder=k.gph;
+  $('famOnly').style.display=t==='family'?'block':'none';
+  $('teachOnly').style.display=k.card?'block':'none';
+  formErr(null);
+  show('sSetup');
+}
+function chOther(){$('fChOwn').style.display=$('fCh').value==='__own'?'block':'none';}
+function formErr(msg){
+  var e=$('formErr');
+  if(!msg){e.style.display='none';e.textContent='';return;}
+  e.textContent=msg;e.style.display='block';
+  try{e.scrollIntoView({behavior:'smooth',block:'center'});}catch(x){}
+}
+function cleanLink(raw){
+  var s=(raw||'').trim().replace(/\s/g,'');
+  if(!s)return null;
+  if(!/^https?:\/\//i.test(s))s='https://'+s;
+  try{
+    var u=new URL(s);
+    if(u.protocol!=='https:'&&u.protocol!=='http:')return null;
+    if(u.hostname.indexOf('.')<0)return null;
+    if(u.protocol==='http:')u.protocol='https:';
+    return u;
+  }catch(e){return null;}
+}
+function toCheck(){
+  var n=$('fN').value.trim();
+  var g=$('fG').value.trim();
+  var m=parseFloat($('fM').value);
+  var c=parseFloat($('fC').value);
+  var u=cleanLink($('fP').value);
+  formErr(null);
+  if(!n){formErr((KINDS[D.type]||KINDS.other).err);return;}
+  if(!g){formErr('Please add the gift idea.');return;}
+  if(!(m>0)){formErr('Please add the most each person might give.');return;}
+  if(!u){formErr('Please add your payment link, for example paypal.me/yourname.');return;}
+  var ch=$('fCh').value;
+  if(ch==='__own')ch=$('fChOwn').value.trim();
+  var kindEl=document.querySelector('input[name="kind"]:checked');
+  D.n=n;D.g=g;D.m=m;D.c=(c>0)?c:0;D.u=u;
+  D.d=$('fD').value||'';
+  D.ms=$('fMsg').value.trim();
+  D.ch=ch;
+  D.kind=kindEl?kindEl.value:'wish';
+  D.card=$('fCard').checked;
+  $('chkHost').textContent=u.hostname;
+  $('chkFull').textContent=u.href;
+  show('sCheck');
+}
+function testLink(){window.open(D.u.href,'_blank','noopener');}
+
+/* ---- Link and message ---- */
+function baseUrl(){
+  var b=window.location.href.split('?')[0].split('#')[0];
+  if(!/^(https?|file):/i.test(b))b='https://picturemygift.com/christmas/';
+  return b;
+}
+function buildLink(){
+  var p=new URLSearchParams();
+  p.set('t',D.type);
+  p.set('n',D.n);
+  p.set('g',D.g);
+  p.set('m',String(D.m));
+  if(D.c)p.set('c',String(D.c));
+  p.set('pp',D.u.href.replace(/^https:\/\//,''));
+  if(D.d)p.set('d',D.d);
+  if(D.ms)p.set('ms',D.ms);
+  if(D.ch)p.set('ch',D.ch);
+  return baseUrl()+'?'+p.toString();
+}
+function buildMessage(link){
+  var up='Up to '+POUND+D.m+' each';
+  var msg='Hi all! '+TREE+' ';
+  if(D.type!=='family'){
+    msg+="We're putting together a group gift for "+D.n+" this Christmas: "+D.g+". If you'd like to contribute, here's the link. "+up+" is plenty, and no pressure at all.";
+    if(D.card&&(D.type==='teacher'||D.type==='work'))msg+="\n\nI'll add everyone's name to a card. If you'd like to write something personal, message me.";
+    msg+="\n\n"+link;
+  } else if(D.kind==='surprise'){
+    msg+="We'd love to give "+D.n+" something really special for Christmas: "+D.g+". It's a surprise, so please keep it secret! It would be great if we could gang together on it. "+up+", but whatever suits you is lovely.\n\nHere's the link:\n"+link;
+  } else {
+    msg+=D.n+" would love "+D.g+" for Christmas. It would be wonderful if we could gang together and give it as one big present from all of us. "+up+", but whatever suits you is lovely.\n\nHere's the link:\n"+link;
+  }
+  return msg;
+}
+function buildShare(){
+  D.link=buildLink();
+  $('shareMsg').value=buildMessage(D.link);
+  $('shareDone').style.display='none';
+  $('sentBtn').style.display='block';
+  $('copied').style.display='none';
+  show('sShare');
+}
+function waUrl(text){
+  var mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||'');
+  return (mobile?'https://wa.me/?text=':'https://web.whatsapp.com/send?text=')+encodeURIComponent(text);
+}
+function openWa(){window.open(waUrl($('shareMsg').value),'_blank','noopener');}
+function copyMsg(){
+  var t=$('shareMsg').value;
+  function ok(){$('copied').style.display='block';}
+  function fallback(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);ok();}
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok).catch(fallback);}else{fallback();}
+}
+function previewGuest(){window.open(D.link,'_blank');}
+function markSent(){
+  $('sentBtn').style.display='none';
+  $('shareDone').style.display='block';
+}
+
+/* ---- Guest page ---- */
+function fmtDate(d){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(d))return '';
+  var x=new Date(d+'T12:00:00');
+  if(isNaN(x.getTime()))return '';
+  return x.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+}
+function initGuest(){
+  var p=new URLSearchParams(window.location.search);
+  var n=(p.get('n')||'').trim();
+  if(!n)return false;
+  var g=(p.get('g')||'').trim();
+  var m=parseFloat(p.get('m'));
+  var c=parseFloat(p.get('c'));
+  var u=cleanLink(p.get('pp'));
+  var d=fmtDate(p.get('d')||'');
+  var ms=(p.get('ms')||'').trim();
+  var ch=(p.get('ch')||'').trim();
+  $('gTitle').textContent='A Christmas gift for '+n;
+  var body=$('gBody');
+  while(body.firstChild)body.removeChild(body.firstChild);
+  if(g)body.appendChild(el('div','gift',g));
+  var meta=el('div','gmeta');
+  var lines=[];
+  if(m>0)lines.push('Suggested: up to '+POUND+m+' each');
+  if(c>0)lines.push('The gift costs about '+POUND+c);
+  if(d)lines.push('Contribute by '+d);
+  lines.forEach(function(t,i){if(i)meta.appendChild(document.createElement('br'));meta.appendChild(document.createTextNode(t));});
+  if(lines.length)body.appendChild(meta);
+  if(ms)body.appendChild(el('div','gmsg',ms));
+  if(u){
+    var b=el('button','btn','Contribute');
+    b.type='button';
+    b.onclick=function(){window.open(u.href,'_blank','noopener');};
+    body.appendChild(b);
+    body.appendChild(el('p','note',"You'll go to "+u.hostname+", the organiser's own payment page. Other guests can't see what you give. The organiser may see payments in their own account."));
+  } else {
+    body.appendChild(el('p','note','This link looks incomplete. Please ask the organiser to send it again.'));
+  }
+  if(ch)body.appendChild(el('p','note','If more is collected than needed, the organiser plans to give the surplus to '+ch+'.'));
+  show('sGuest');
+  return true;
+}
+
+/* ---- Menu ---- */
+var menuFocus=null;
+function showMenuPage(id){
+  $('mHome').style.display=id?'none':'block';
+  document.querySelectorAll('.mpage').forEach(function(pg){pg.classList.toggle('on',pg.id===id);});
+  $('menu').scrollTop=0;
+  var f=id?document.querySelector('#'+id+' .mbtn'):$('mClose');
+  if(f){try{f.focus();}catch(e){}}
+}
+function openMenu(){menuFocus=document.activeElement;$('menu').classList.add('open');showMenuPage(null);}
+function openMenuPage(id){if(!$('menu').classList.contains('open')){menuFocus=document.activeElement;$('menu').classList.add('open');}showMenuPage(id);}
+function menuBack(){showMenuPage(null);}
+function closeMenu(){
+  $('menu').classList.remove('open');
+  showMenuPage(null);
+  if(menuFocus&&menuFocus.focus){try{menuFocus.focus();}catch(e){}}
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&$('menu').classList.contains('open'))closeMenu();});
+
+window.addEventListener('DOMContentLoaded',function(){
+  if(!initGuest())show('sHome');
+});
+</script>
+</body>
+</html>
