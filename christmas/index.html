@@ -43,7 +43,8 @@ textarea.in{min-height:70px;resize:vertical;}
 .row{display:flex;gap:10px;}
 .row>div{flex:1;}
 .choice{display:flex;align-items:flex-start;gap:10px;min-height:44px;padding:8px 0;font-size:14px;text-transform:none;letter-spacing:0;font-weight:500;cursor:pointer;}
-.choice input{width:22px;height:22px;margin-top:1px;flex-shrink:0;accent-color:#8A5A00;}
+.card label.choice{display:flex;align-items:flex-start;gap:10px;min-height:44px;padding:8px 0;font-size:14px;text-transform:none;letter-spacing:0;font-weight:500;line-height:1.4;margin-bottom:0;}
+.choice input{width:20px;height:20px;margin:1px 0 0;flex-shrink:0;accent-color:#8A5A00;}
 .err{display:none;color:var(--err);font-size:13px;font-weight:700;line-height:1.5;margin-bottom:12px;}
 .msgbox{width:100%;min-height:190px;padding:12px 13px;border-radius:12px;border:1.5px solid #8A8A94;font-size:14px;line-height:1.55;color:var(--ink);background:#fff;resize:vertical;margin-bottom:10px;}
 .note{font-size:12px;color:var(--silver);line-height:1.55;margin-bottom:12px;}
@@ -78,6 +79,9 @@ textarea.in{min-height:70px;resize:vertical;}
 .mstep{display:flex;gap:12px;margin:14px 0;font-size:14px;line-height:1.6;}
 .mn{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .menu a{color:var(--gold2);}
+.menu a.bridge{color:#000;}
+.hintc{font-size:12px;line-height:1.5;color:#55555F;margin:-2px 0 14px 30px;}
+.thanks{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);text-align:center;line-height:1.3;margin:6px 0 4px;}
 </style>
 </head>
 <body>
@@ -136,17 +140,14 @@ textarea.in{min-height:70px;resize:vertical;}
 
         <label for="fP">Your payment link</label>
         <input class="in" id="fP" placeholder="paypal.me/you or revolut.me/you or monzo.me/you" autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:6px">
-        <p class="hint">Guests pay you directly. We never handle money.</p>
+        <p class="hint">People in the group pay you directly. We never handle money.</p>
 
         <label for="fD">Contribute by <span class="opt">(optional)</span></label>
         <input class="in" id="fD" type="date">
 
-        <label for="fMsg">A Christmas message for guests <span class="opt">(optional)</span></label>
-        <textarea class="in" id="fMsg" maxlength="200" placeholder="Thank you for being part of this!"></textarea>
-
         <label for="fCh">If more is raised than needed <span class="opt">(optional)</span></label>
         <select class="in" id="fCh" onchange="chOther()" style="margin-bottom:10px">
-          <option value="">No charity</option>
+          <option value="__extra" selected>Put it towards something extra for the gift</option>
           <option>NSPCC</option>
           <option>Save the Children</option>
           <option>Children in Need</option>
@@ -158,7 +159,8 @@ textarea.in{min-height:70px;resize:vertical;}
         <p class="hint" style="margin-top:0">This is your plan for any surplus. The app cannot pass money on for you.</p>
 
         <div id="teachOnly">
-          <label class="choice"><input type="checkbox" id="fCard"><span>Add a line about a card (I will add everyone's name)</span></label>
+          <label class="choice"><input type="checkbox" id="fCard"><span>Mention a card signed by everyone</span></label>
+          <p class="hintc">It adds this to your message: "I'll add everyone's name to a card. If you'd like to write something personal, message me."</p>
         </div>
 
         <div class="err" id="formErr" role="alert"></div>
@@ -174,7 +176,7 @@ textarea.in{min-height:70px;resize:vertical;}
       <h1>Check your payment link</h1>
       <p class="sub">A mistake here cannot be corrected once the link is sent. Please check it.</p>
       <div class="card">
-        <span class="lbl">Guests will be sent to</span>
+        <span class="lbl">People in the group will be sent to</span>
         <p id="chkHost" style="font-weight:700;font-size:16px;margin-bottom:4px"></p>
         <p id="chkFull" style="font-size:12px;line-height:1.5;word-break:break-all;color:#55555F;margin-bottom:16px"></p>
         <button class="btn line" onclick="testLink()" style="color:var(--ink);border-color:#8A8A94">Test my payment link</button>
@@ -194,9 +196,9 @@ textarea.in{min-height:70px;resize:vertical;}
       <button class="btn wa" onclick="openWa()">Open WhatsApp with the message ready</button>
       <button class="linkbtn" onclick="copyMsg()">Use another app? Copy the message instead.</button>
       <div class="note" id="copied" style="display:none;text-align:center">Copied. Paste it in your other app.</div>
-      <button class="linkbtn" onclick="previewGuest()">See what guests will see</button>
+      <button class="linkbtn" onclick="previewGuest()">See what the group will see</button>
       <button class="btn" id="sentBtn" onclick="markSent()" style="margin-top:12px">I have sent it</button>
-      <div class="done" id="shareDone" role="status"><strong>You're all set</strong><span style="font-size:14px;line-height:1.5">Guests tap the link and choose whether to contribute. Nothing is stored, so there is nothing more to do.</span></div>
+      <div class="done" id="shareDone" role="status"><strong>You're all set</strong><span style="font-size:14px;line-height:1.5">People in the group tap the link if they want to contribute. Nothing is stored, so there is nothing more to do.</span></div>
       <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
     </div>
   </div>
@@ -224,16 +226,23 @@ textarea.in{min-height:70px;resize:vertical;}
       <button class="mitem" onclick="openMenuPage('mp-how')"><span>How it works</span><span aria-hidden="true">&rsaquo;</span></button>
       <button class="mitem" onclick="openMenuPage('mp-privacy')"><span>Privacy</span><span aria-hidden="true">&rsaquo;</span></button>
       <button class="mitem" onclick="openMenuPage('mp-faq')"><span>FAQ</span><span aria-hidden="true">&rsaquo;</span></button>
+      <button class="mitem" onclick="openMenuPage('mp-bday')"><span>The birthday kit</span><span aria-hidden="true">&rsaquo;</span></button>
       <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
       <div class="mcopy">&copy; 2026 Catherine Ilic</div>
     </div>
 
     <div class="mpage" id="mp-about">
       <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">About</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
-      <div class="mtxt">At Christmas, children can end up with more presents than they can enjoy. Parents I spoke to said they would welcome something simpler.</div>
-      <div class="mtxt">For a child, one shared gift can mean more than a pile of small ones. For a teacher, a group gift keeps things simple: one present from the class, with no collection list and no envelope of cash.</div>
-      <div class="mtxt">This page is for the parent or relative who organises it. You set up the gift, share one message in your group chat, and guests pay you directly.</div>
-      <div class="mtxt">It is a free trial. It grew out of my master's research at the London Interdisciplinary School, and it is the Christmas cousin of the birthday kit.</div>
+      <div class="mtxt"><strong>Would a group gift make Christmas simpler?</strong></div>
+      <div class="mtxt">Often, yes. A class can give a teacher one present instead of a pile of small ones. Relatives can give a child one gift together. Colleagues can do the same for someone in the team.</div>
+      <div class="mtxt">This page makes the first step easy. You say who the gift is for and what it is, and you get a message ready to paste into your group chat: WhatsApp, Signal or whatever your group uses. Anyone who wants to join pays you directly through your own payment link. The page never handles money, and nothing is saved.</div>
+      <div class="mtxt">It's free and super easy to use. It comes from the birthday kit, which helps parents plan collective birthday gifts, and which grew out of my master's research at the London Interdisciplinary School.</div>
+    </div>
+
+    <div class="mpage" id="mp-bday">
+      <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">The birthday kit</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mtxt">A party invitation kit for birthday gifts done differently. Invite your friends, and let the parents who want to give together towards one gift, instead of a pile of small ones. Free to try.</div>
+      <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
     </div>
 
     <div class="mpage" id="mp-how">
@@ -242,23 +251,22 @@ textarea.in{min-height:70px;resize:vertical;}
       <div class="mstep"><div class="mn">2</div><div><strong>Add the gift idea and your payment link.</strong></div></div>
       <div class="mstep"><div class="mn">3</div><div><strong>Check your payment link.</strong> Once the link is sent, it cannot be changed.</div></div>
       <div class="mstep"><div class="mn">4</div><div><strong>Send the ready-made message to your group chat.</strong> The message is a template. Change it however you like before you send it, so it sounds like you.</div></div>
-      <div class="mtxt">Guests tap the link and choose whether to contribute. If they would rather not, they simply don't. Nobody is asked why.</div>
+      <div class="mtxt">People in the group tap the link if they want to contribute.</div>
     </div>
 
     <div class="mpage" id="mp-privacy">
       <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">Privacy</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
       <div class="mtxt"><strong>Everything is in the link.</strong> We store nothing: no names, no photos, no payment details, no cookies, no analytics.</div>
-      <div class="mtxt">The link is as private as the chat you share it in. For a child's gift, please use a first name only.</div>
-      <div class="mtxt">The page loads its fonts from Google Fonts and its picture from jsDelivr, so those services can see that the page was opened.</div>
+      <div class="mtxt">The link is as private as the chat you share it in.</div>
       <div class="mtxt">Questions? Write to <a href="mailto:hello@picturemygift.com">hello@picturemygift.com</a>.</div>
     </div>
 
     <div class="mpage" id="mp-faq">
       <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">FAQ</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
-      <div class="mtxt"><strong>Does the money go through this app?</strong><br>No. Guests pay your own payment link directly.</div>
+      <div class="mtxt"><strong>Does the money go through this app?</strong><br>No. People in the group pay your own payment link directly.</div>
       <div class="mtxt"><strong>What if someone prefers not to join?</strong><br>They don't reply or pay. Nothing is tracked.</div>
-      <div class="mtxt"><strong>Who sees what people give?</strong><br>Other guests can't. You may see payments in your own payment account.</div>
-      <div class="mtxt"><strong>What if more is raised than needed?</strong><br>It is up to you. If you named a charity, you can pass the surplus on. This app can't do it for you.</div>
+      <div class="mtxt"><strong>Who sees what people give?</strong><br>Other people in the group can't. You may see payments in your own payment account.</div>
+      <div class="mtxt"><strong>What if more is raised than needed?</strong><br>It is up to you. You can put it towards something extra for the gift or pass it on to a charity. This app can't do it for you.</div>
       <div class="mtxt"><strong>Is there a target amount?</strong><br>Optional. It is information only, because the app can't see what has been paid.</div>
     </div>
   </div>
@@ -331,7 +339,6 @@ function toCheck(){
   var kindEl=document.querySelector('input[name="kind"]:checked');
   D.n=n;D.g=g;D.m=m;D.c=(c>0)?c:0;D.u=u;
   D.d=$('fD').value||'';
-  D.ms=$('fMsg').value.trim();
   D.ch=ch;
   D.kind=kindEl?kindEl.value:'wish';
   D.card=$('fCard').checked;
@@ -356,7 +363,6 @@ function buildLink(){
   if(D.c)p.set('c',String(D.c));
   p.set('pp',D.u.href.replace(/^https:\/\//,''));
   if(D.d)p.set('d',D.d);
-  if(D.ms)p.set('ms',D.ms);
   if(D.ch)p.set('ch',D.ch);
   return baseUrl()+'?'+p.toString();
 }
@@ -415,7 +421,6 @@ function initGuest(){
   var c=parseFloat(p.get('c'));
   var u=cleanLink(p.get('pp'));
   var d=fmtDate(p.get('d')||'');
-  var ms=(p.get('ms')||'').trim();
   var ch=(p.get('ch')||'').trim();
   $('gTitle').textContent='A Christmas gift for '+n;
   var body=$('gBody');
@@ -428,17 +433,18 @@ function initGuest(){
   if(d)lines.push('Contribute by '+d);
   lines.forEach(function(t,i){if(i)meta.appendChild(document.createElement('br'));meta.appendChild(document.createTextNode(t));});
   if(lines.length)body.appendChild(meta);
-  if(ms)body.appendChild(el('div','gmsg',ms));
   if(u){
     var b=el('button','btn','Contribute');
     b.type='button';
     b.onclick=function(){window.open(u.href,'_blank','noopener');};
     body.appendChild(b);
-    body.appendChild(el('p','note',"You'll go to "+u.hostname+", the organiser's own payment page. Other guests can't see what you give. The organiser may see payments in their own account."));
+    body.appendChild(el('p','note',"You'll go to "+u.hostname+", the organiser's own payment page. Other people in the group can't see what you give. The organiser may see payments in their own account."));
   } else {
     body.appendChild(el('p','note','This link looks incomplete. Please ask the organiser to send it again.'));
   }
-  if(ch)body.appendChild(el('p','note','If more is collected than needed, the organiser plans to give the surplus to '+ch+'.'));
+  if(ch==='__extra')body.appendChild(el('p','note','If more is raised than needed, it will go towards something extra for the gift.'));
+  else if(ch)body.appendChild(el('p','note','If more is collected than needed, the organiser plans to give the surplus to '+ch+'.'));
+  body.appendChild(el('div','thanks','Many hands make a lovely Christmas gift. Thank you!'));
   show('sGuest');
   return true;
 }
