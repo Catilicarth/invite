@@ -24,6 +24,7 @@ h2{font-size:22px;margin:14px 0 8px;}
 .sub{font-size:14px;color:var(--silver);line-height:1.55;margin-bottom:16px;}
 .poster{display:block;width:100%;height:auto;background:var(--navy);}
 .hpad{padding:8px 24px 0;}
+.homesub{font-size:14px;line-height:1.5;color:var(--silver);text-align:center;margin:-8px 0 20px;}
 .opt-card{display:block;width:100%;text-align:left;background:var(--navy2);border:1.5px solid rgba(185,188,194,.4);border-radius:16px;padding:14px 16px;margin-bottom:12px;cursor:pointer;color:var(--white);}
 .opt-card .oh{display:block;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold2);margin-bottom:3px;}
 .opt-card .od{display:block;font-size:14px;line-height:1.45;color:var(--silver);}
@@ -93,6 +94,7 @@ textarea.in{min-height:70px;resize:vertical;}
     <img class="poster" src="https://cdn.jsdelivr.net/gh/Catilicarth/invite@main/christmas/poster.jpg" alt="Picture My Gift Christmas poster, with a gold and silver gift made of little festive pictures" onerror="this.style.display='none'">
     <div class="hpad">
       <div class="tagline">Christmas group gifts, made simple</div>
+      <p class="homesub">Set up a group gift in a minute, then send it to your group chat.</p>
       <button class="btn" onclick="show('sChoose')">Let's start!</button>
       <button class="menubtn" onclick="openMenu()"><span class="hls"><i></i><i></i><i></i><i></i></span><span class="menutxt">Menu</span></button>
       <a class="bridge" href="https://picturemygift.com/trial">Planning a birthday party for your child?<br>Try the birthday kit</a>
@@ -225,7 +227,7 @@ textarea.in{min-height:70px;resize:vertical;}
 
 </div>
 
-<div class="foot"><button onclick="openMenuPage('mp-privacy')">Privacy</button></div>
+<div class="foot"><button onclick="openMenuPage('mp-privacy')">Privacy</button><div style="margin-top:2px">&copy; 2026 Catherine Ilic</div></div>
 
 <!-- MENU -->
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
@@ -245,7 +247,7 @@ textarea.in{min-height:70px;resize:vertical;}
       <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">About</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
       <div class="mtxt"><strong>Would a group gift make Christmas simpler?</strong></div>
       <div class="mtxt">Often, yes. A class can give a teacher one present instead of a pile of small ones. Relatives can give a child one gift together. Colleagues can do the same for someone in the team.</div>
-      <div class="mtxt">This page makes the first step easy. You say who the gift is for and what it is, and you get a message ready to paste into your group chat: WhatsApp, Signal or whatever your group uses. Anyone who wants to join pays you directly through your own payment link. The page never handles money, and nothing is saved.</div>
+      <div class="mtxt">Made for people who want to set up a group gift quickly. You say who the gift is for and what it is, and you get a message ready to paste into your group chat: WhatsApp, Signal or whatever your group uses. Anyone who wants to join pays you directly through your own payment link. The page never handles money, and nothing is saved.</div>
       <div class="mtxt">It's free and super easy to use. It comes from the birthday kit, which helps parents plan collective birthday gifts, and which grew out of my master's research at the London Interdisciplinary School.</div>
     </div>
 
@@ -257,10 +259,11 @@ textarea.in{min-height:70px;resize:vertical;}
 
     <div class="mpage" id="mp-how">
       <div class="mhead"><button class="mbtn" onclick="menuBack()" aria-label="Back">&larr;</button><h2 class="mlogo" style="margin:0">How it works</h2><button class="mbtn" onclick="closeMenu()" aria-label="Close menu">&#10005;</button></div>
+      <div class="mtxt"><strong>Made for setting up a group gift quickly, through the group chat you already use.</strong></div>
       <div class="mstep"><div class="mn">1</div><div><strong>Choose who the gift is for.</strong> Someone at school, a family member, a colleague, or anyone else.</div></div>
       <div class="mstep"><div class="mn">2</div><div><strong>Add the gift idea and your payment link.</strong></div></div>
       <div class="mstep"><div class="mn">3</div><div><strong>Check your payment link.</strong> Once the link is sent, it cannot be changed.</div></div>
-      <div class="mstep"><div class="mn">4</div><div><strong>Send the ready-made message to your group chat.</strong> The message is a template. Change it however you like before you send it, so it sounds like you.</div></div>
+      <div class="mstep"><div class="mn">4</div><div><strong>Send the ready-made message to your group chat</strong> (WhatsApp, Signal or whatever you use). The message is a template. Change it however you like before you send it, so it sounds like you.</div></div>
       <div class="mtxt">People in the group tap the link if they want to contribute.</div>
     </div>
 
