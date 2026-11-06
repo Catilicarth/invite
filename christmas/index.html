@@ -133,14 +133,24 @@ textarea.in{min-height:70px;resize:vertical;}
           </div>
         </div>
 
+        <label for="fCu">Currency</label>
+        <select class="in" id="fCu" onchange="curOther()" style="margin-bottom:10px">
+          <option value="£" selected>&pound; Pound</option>
+          <option value="€">&euro; Euro</option>
+          <option value="CHF">CHF Swiss franc</option>
+          <option value="$">$ Dollar</option>
+          <option value="__own">Other...</option>
+        </select>
+        <input class="in" id="fCuOwn" maxlength="5" placeholder="Symbol or code, e.g. SEK" aria-label="Your currency symbol or code" style="display:none">
+
         <div class="row">
-          <div><label for="fC">Costs about <span class="opt">(optional)</span></label><input class="in" id="fC" type="number" min="1" inputmode="decimal" placeholder="&pound;60"></div>
-          <div><label for="fM">Up to each</label><input class="in" id="fM" type="number" min="1" inputmode="decimal" placeholder="&pound;10"></div>
+          <div><label for="fC">Costs about <span class="opt">(optional)</span></label><input class="in" id="fC" type="number" min="1" inputmode="decimal" placeholder="60"></div>
+          <div><label for="fM">Up to each</label><input class="in" id="fM" type="number" min="1" inputmode="decimal" placeholder="10"></div>
         </div>
 
         <label for="fP">Your payment link</label>
         <input class="in" id="fP" placeholder="paypal.me/you or revolut.me/you or monzo.me/you" autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:6px">
-        <p class="hint">People in the group pay you directly. We never handle money.</p>
+        <p class="hint">People in the group pay you directly. We never handle money. Make sure your payment link uses the same currency.</p>
 
         <label for="fD">Contribute by <span class="opt">(optional)</span></label>
         <input class="in" id="fD" type="date">
@@ -276,6 +286,8 @@ textarea.in{min-height:70px;resize:vertical;}
 var D={};
 var TREE='\uD83C\uDF84';
 var POUND='\u00A3';
+function cleanCur(c){c=(c||'').replace(/[^\w\u00A3\u20AC$.]/g,'').slice(0,5);return c||POUND;}
+function money(cur,n){cur=cleanCur(cur);return /^[A-Za-z]{2,}$/.test(cur)?cur+' '+n:cur+n;}
 var SCREENS=['sHome','sChoose','sSetup','sCheck','sShare','sGuest'];
 
 function $(id){return document.getElementById(id);}
@@ -304,6 +316,7 @@ function startSetup(t){
   formErr(null);
   show('sSetup');
 }
+function curOther(){$('fCuOwn').style.display=$('fCu').value==='__own'?'block':'none';}
 function chOther(){$('fChOwn').style.display=$('fCh').value==='__own'?'block':'none';}
 function formErr(msg){
   var e=$('formErr');
@@ -326,6 +339,9 @@ function cleanLink(raw){
 function toCheck(){
   var n=$('fN').value.trim();
   var g=$('fG').value.trim();
+  var cu=$('fCu').value;
+  if(cu==='__own')cu=$('fCuOwn').value.trim();
+  cu=cleanCur(cu);
   var m=parseFloat($('fM').value);
   var c=parseFloat($('fC').value);
   var u=cleanLink($('fP').value);
@@ -337,7 +353,7 @@ function toCheck(){
   var ch=$('fCh').value;
   if(ch==='__own')ch=$('fChOwn').value.trim();
   var kindEl=document.querySelector('input[name="kind"]:checked');
-  D.n=n;D.g=g;D.m=m;D.c=(c>0)?c:0;D.u=u;
+  D.cu=cu;D.n=n;D.g=g;D.m=m;D.c=(c>0)?c:0;D.u=u;
   D.d=$('fD').value||'';
   D.ch=ch;
   D.kind=kindEl?kindEl.value:'wish';
@@ -360,6 +376,7 @@ function buildLink(){
   p.set('n',D.n);
   p.set('g',D.g);
   p.set('m',String(D.m));
+  if(D.cu&&D.cu!==POUND)p.set('cu',D.cu);
   if(D.c)p.set('c',String(D.c));
   p.set('pp',D.u.href.replace(/^https:\/\//,''));
   if(D.d)p.set('d',D.d);
@@ -367,7 +384,7 @@ function buildLink(){
   return baseUrl()+'?'+p.toString();
 }
 function buildMessage(link){
-  var up='Up to '+POUND+D.m+' each';
+  var up='Up to '+money(D.cu,D.m)+' each';
   var msg='Hi all! '+TREE+' ';
   if(D.type!=='family'){
     msg+="We're putting together a group gift for "+D.n+" this Christmas: "+D.g+". If you'd like to contribute, here's the link. "+up+" is plenty, and no pressure at all.";
@@ -419,6 +436,7 @@ function initGuest(){
   var g=(p.get('g')||'').trim();
   var m=parseFloat(p.get('m'));
   var c=parseFloat(p.get('c'));
+  var cu=cleanCur(p.get('cu'));
   var u=cleanLink(p.get('pp'));
   var d=fmtDate(p.get('d')||'');
   var ch=(p.get('ch')||'').trim();
@@ -428,8 +446,8 @@ function initGuest(){
   if(g)body.appendChild(el('div','gift',g));
   var meta=el('div','gmeta');
   var lines=[];
-  if(m>0)lines.push('Suggested: up to '+POUND+m+' each');
-  if(c>0)lines.push('The gift costs about '+POUND+c);
+  if(m>0)lines.push('Suggested: up to '+money(cu,m)+' each');
+  if(c>0)lines.push('The gift costs about '+money(cu,c));
   if(d)lines.push('Contribute by '+d);
   lines.forEach(function(t,i){if(i)meta.appendChild(document.createElement('br'));meta.appendChild(document.createTextNode(t));});
   if(lines.length)body.appendChild(meta);
