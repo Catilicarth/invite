@@ -147,7 +147,7 @@ textarea.in{min-height:70px;resize:vertical;}
 
         <div class="row">
           <div><label for="fC">Costs about <span class="opt">(optional)</span></label><input class="in" id="fC" type="number" min="1" inputmode="decimal" placeholder="60"></div>
-          <div><label for="fM">Up to each</label><input class="in" id="fM" type="number" min="1" inputmode="decimal" placeholder="10"></div>
+          <div><label for="fM">Up to each <span class="opt">(optional)</span></label><input class="in" id="fM" type="number" min="1" inputmode="decimal" placeholder="10"></div>
         </div>
 
         <label for="fP">Your payment link</label>
@@ -353,12 +353,11 @@ function toCheck(){
   formErr(null);
   if(!n){formErr((KINDS[D.type]||KINDS.other).err);return;}
   if(!g){formErr('Please add the gift idea.');return;}
-  if(!(m>0)){formErr('Please add the most each person might give.');return;}
   if(!u){formErr('Please add your payment link, for example paypal.me/yourname.');return;}
   var ch=$('fCh').value;
   if(ch==='__own')ch=$('fChOwn').value.trim();
   var kindEl=document.querySelector('input[name="kind"]:checked');
-  D.cu=cu;D.n=n;D.g=g;D.m=m;D.c=(c>0)?c:0;D.u=u;
+  D.cu=cu;D.n=n;D.g=g;D.m=(m>0)?m:0;D.c=(c>0)?c:0;D.u=u;
   D.d=$('fD').value||'';
   D.ch=ch;
   D.kind=kindEl?kindEl.value:'wish';
@@ -380,7 +379,7 @@ function buildLink(){
   p.set('t',D.type);
   p.set('n',D.n);
   p.set('g',D.g);
-  p.set('m',String(D.m));
+  if(D.m>0)p.set('m',String(D.m));
   if(D.cu&&D.cu!==POUND)p.set('cu',D.cu);
   if(D.c)p.set('c',String(D.c));
   p.set('pp',D.u.href.replace(/^https:\/\//,''));
@@ -389,16 +388,17 @@ function buildLink(){
   return baseUrl()+'?'+p.toString();
 }
 function buildMessage(link){
-  var up='Up to '+money(D.cu,D.m)+' each';
+  var has=D.m>0;
+  var up=has?'Up to '+money(D.cu,D.m)+' each':'';
   var msg='Hi all! '+TREE+' ';
   if(D.type!=='family'){
-    msg+="We're putting together a group gift for "+D.n+" this Christmas: "+D.g+". If you'd like to contribute, here's the link. "+up+" is plenty, and no pressure at all.";
+    msg+="We're putting together a group gift for "+D.n+" this Christmas: "+D.g+". If you'd like to contribute, here's the link. "+(has?up+", but any amount is welcome.":"Any amount is welcome.");
     if(D.card&&(D.type==='teacher'||D.type==='work'))msg+="\n\nI'll add everyone's name to a card. If you'd like to write something personal, message me.";
     msg+="\n\n"+link;
   } else if(D.kind==='surprise'){
-    msg+="We'd love to give "+D.n+" something really special for Christmas: "+D.g+". It's a surprise, so please keep it secret! It would be great if we could gang together on it. "+up+", but whatever suits you is lovely.\n\nHere's the link:\n"+link;
+    msg+="We'd love to give "+D.n+" something really special for Christmas: "+D.g+". It's a surprise, so please keep it secret! It would be great if we could gang together on it. "+(has?up+", but any amount is welcome.":"Any amount is welcome.")+"\n\nHere's the link:\n"+link;
   } else {
-    msg+=D.n+" would love "+D.g+" for Christmas. It would be wonderful if we could gang together and give it as one big present from all of us. "+up+", but whatever suits you is lovely.\n\nHere's the link:\n"+link;
+    msg+=D.n+" would love "+D.g+" for Christmas. It would be wonderful if we could gang together and give it as one big present from all of us. "+(has?up+", but any amount is welcome.":"Any amount is welcome.")+"\n\nHere's the link:\n"+link;
   }
   return msg;
 }
