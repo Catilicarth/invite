@@ -439,11 +439,11 @@ See the invitation and RSVP here:
               </div>
               <img id="wishImgPreview" alt="wish">
             </div>
-            <div class="fg"><span class="flbl">Up to each</span><input class="fin" style="margin-bottom:0" type="number" id="maxamt" placeholder="10" min="1" oninput="updS4()"><div class="amt-max" style="line-height:1.5">Amounts show as &pound; for now. If you're outside the UK, ignore the symbol: the number you enter is what counts, in the currency of your payment link.</div></div>
+            <div class="fg"><span class="flbl">Up to each <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span><input class="fin" style="margin-bottom:0" type="number" id="maxamt" placeholder="10" min="1" oninput="updS4()"><div class="amt-max" style="line-height:1.5">Amounts show as &pound; for now. If you're outside the UK, ignore the symbol: the number you enter is what counts, in the currency of your payment link.</div></div>
             <div id="ppSection" style="margin-top:12px">
               <span class="flbl">Your payment link</span>
               <input class="fin" id="paypalUser" placeholder="paypal.me/you  or  revolut.me/you  or  monzo.me/you" autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:4px">
-              <div style="font-size:12px;color:var(--mid);line-height:1.5">Works with PayPal.me, Revolut.me, Monzo.me or any payment link. Guests pay you directly - amounts stay private.</div>
+              <div style="font-size:12px;color:var(--mid);line-height:1.5">Works with PayPal.me, Revolut.me, Monzo.me or any payment link. Guests pay you directly.</div>
             </div>
             <div class="charity-note">
               <div class="charity-note-txt"><em>Optional - planned for the full product:</em> If more is raised than needed, the surplus goes to a charity of your child's choice. In this trial, payments go straight to you, so please pass it on yourself.</div>
@@ -554,7 +554,7 @@ See the invitation and RSVP here:
               <input class="fin" id="champName" placeholder="Emma" style="margin-bottom:10px" oninput="updChamp()">
               <span class="flbl">Their payment link</span>
               <input class="fin" id="champPayPal" placeholder="paypal.me/... or revolut.me/... or monzo.me/..." autocomplete="off" autocorrect="off" autocapitalize="none" style="margin-bottom:4px" oninput="updChamp()">
-              <div style="font-size:12px;color:var(--mid);line-height:1.5;margin-bottom:10px">Parents pay your friend directly - amounts stay private.</div>
+              <div style="font-size:12px;color:var(--mid);line-height:1.5;margin-bottom:10px">Parents pay your friend directly.</div>
             </div>
             <div class="champ-msg-box">
               <div class="champ-msg-hd"><div class="champ-msg-ico">💬</div><div class="champ-msg-lbl">Champion's WhatsApp message</div></div>
@@ -632,10 +632,10 @@ See the invitation and RSVP here:
               <div class="s4-opt-name"><div class="s4-opt-ico"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="44" width="56" height="30" rx="4" fill="#CF1807"/><rect x="10" y="28" width="60" height="18" rx="4" fill="#CD1561"/><rect x="34" y="28" width="12" height="46" rx="2" fill="#EED5AB"/><rect x="10" y="35" width="60" height="8" rx="2" fill="#EED5AB"/><path d="M38,26 C32,12 12,10 16,22 C20,30 34,26 38,26 Z" fill="#E33E04"/><path d="M42,26 C48,12 68,10 64,22 C60,30 46,26 42,26 Z" fill="#E33E04"/><ellipse cx="40" cy="26" rx="5" ry="6" fill="#EED5AB"/></svg></div><span>Join the group gift</span></div>
               <div class="s4-chkbox" id="gchk"></div>
             </div>
-            <div class="s4-opt-desc" id="goptdesc"><span id="goptname">Mia</span> has <span id="goptpronoun">her</span> heart set on <span id="gwish">a bike</span>. Suggested: up to £<span id="gmax">10</span> each.</div>
+            <div class="s4-opt-desc" id="goptdesc"><span id="goptname">Mia</span> has <span id="goptpronoun">her</span> heart set on <span id="gwish">a bike</span>.<span id="gsug"> Suggested: up to £<span id="gmax">10</span> each.</span></div>
             <div class="s4-opt-detail">
               <div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1" onclick="event.stopPropagation()"></div>
-              <div class="amt-max">Suggested: up to £<span id="gmax2">10</span> each</div>
+              <div class="amt-max" id="gmaxrow">Suggested: up to £<span id="gmax2">10</span> each</div>
               <button class="act-btn" onclick="event.stopPropagation();gContribute()">Contribute →</button>
               <div id="gCharityNote" style="display:none;font-size:12px;color:var(--mid);font-style:italic;margin-top:8px;text-align:center;line-height:1.5"></div>
             </div>
@@ -731,10 +731,10 @@ const s4BaseHTML=`
             </div>
             <div class="s4-chkbox" id="s4chk"></div>
           </div>
-          <div class="s4-opt-desc" id="s4optdesc"><span id="s4optname2">them</span> has <span id="s4optpronoun">their</span> heart set on <span id="s4optwish">a gift</span>. Suggested: up to £<span id="s4optmax">10</span> each.</div>
+          <div class="s4-opt-desc" id="s4optdesc"><span id="s4optname2">them</span> has <span id="s4optpronoun">their</span> heart set on <span id="s4optwish">a gift</span>.<span id="s4sug"> Suggested: up to £<span id="s4optmax">10</span> each.</span></div>
           <div class="s4-opt-detail" id="s4detail">
             <div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1"></div>
-            <div class="amt-max">Suggested: up to £10 each</div>
+            <div class="amt-max" id="s4maxrow">Suggested: up to £10 each</div>
             <button class="act-btn" onclick="showThanks()">Contribute →</button>
           </div>
         </div>
@@ -865,7 +865,7 @@ function updS4(){}
 function buildS4(){
   const name=document.getElementById('cname').value||'Mia';
   const wish=document.getElementById('cwish').value||'a day out at Warwick Castle';
-  const max=document.getElementById('maxamt').value||'10';
+  const max=document.getElementById('maxamt').value||'';
   const ideaName=document.getElementById('ideaName').value||'a special activity';
   const ideaAction=document.getElementById('ideaAction').value||'';
   document.getElementById('s4av').src=curAv;
@@ -876,8 +876,8 @@ function buildS4(){
   const dt=document.getElementById('s4detail');
   if(curWish===1){
     nm.textContent='Join the group gift';
-    ds.textContent=name+' has her heart set on '+wish+'. Suggested: up to £'+max+' each.';
-    dt.innerHTML='<div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1"></div><div class="amt-max">Suggested: up to £'+max+' each</div><button class="act-btn" onclick="gContribute()">Contribute →</button>';
+    ds.textContent=name+' has her heart set on '+wish+'.'+(max?' Suggested: up to £'+max+' each.':'');
+    dt.innerHTML='<div class="amt-row"><span class="amt-sym">£</span><input class="amt-in" type="number" placeholder="Your amount" min="1"></div>'+(max?'<div class="amt-max">Suggested: up to £'+max+' each</div>':'')+'<button class="act-btn" onclick="gContribute()">Contribute →</button>';
   } else {
     nm.textContent=ideaName;
     ds.textContent=ideaAction;
@@ -949,13 +949,13 @@ function toggleChamp(){
 function updChamp(){
   const childName=document.getElementById('cname').value||'Mia';
   const wish=document.getElementById('cwish').value||'a bike';
-  const max=document.getElementById('maxamt').value||'10';
+  const max=document.getElementById('maxamt').value||'';
   const slug=childName.toLowerCase().replace(/\s/g,'-');
   const ek=E.cake||'';
   const line1='Hey! You know ' + childName + "'s birthday is coming up "+ek;
   const pronoun=childPronoun==='he'?'He':childPronoun==='they'?'They':'She';
   const line2=getPronounVerb()+' been dreaming about ' + wish + '.';
-  const line3='It would be lovely to make it happen as a group, instead of each of us bringing a present - but totally optional, max \u00A3' + max + ' each, all anonymous.';
+  const line3='It would be lovely to make it happen as a group, instead of each of us bringing a present - but totally optional.' + (max ? ' Up to \u00A3' + max + ' each.' : '');
   const line4='Here\'s the link to join the group gift: '+(window._giftUrlBase||window._giftUrl||'(generate your invite link first)');
   const msg = line1 + '\n' + line2 + '\n' + line3 + '\n' + line4;
   document.getElementById('champMsgTa').value = msg;
@@ -1024,7 +1024,13 @@ function buildGuest(){
   document.getElementById('gtime').textContent='⏰ '+t;
   document.getElementById('gloc').textContent='📍 '+l;
   document.getElementById('gwish').textContent=document.getElementById('cwish').value||'a bike';
-  document.getElementById('gmax').textContent=document.getElementById('maxamt').value||'10';
+  var gm=document.getElementById('maxamt').value||'';
+  document.getElementById('gmax').textContent=gm;
+  if(document.getElementById('gmax2'))document.getElementById('gmax2').textContent=gm;
+  showSug(!!gm);
+}
+function showSug(on){
+  ['gsug','gmaxrow','s4sug','s4maxrow'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display=on?'':'none';});
 }
 function gRsvpShow(){
   document.getElementById('gRsvpBtns').style.display='none';
@@ -1242,7 +1248,7 @@ function initGuestFromParams(){
     var time=p.get('t')||'';
     var loc=p.get('l')||'';
     var wish=p.get('w')||'';
-    var max=p.get('m')||'10';
+    var max=p.get('m')||'';
     var pp=p.get('pp')||'';
     if(document.getElementById('gname'))document.getElementById('gname').textContent=name+"'s birthday party";
     if(document.getElementById('gdate'))document.getElementById('gdate').textContent=date?'📅 '+fmtGuestDate(date):'';
@@ -1268,7 +1274,8 @@ function initGuestFromParams(){
     if(document.getElementById('s4optname2'))document.getElementById('s4optname2').textContent=name||'them';
     if(document.getElementById('s4optpronoun'))document.getElementById('s4optpronoun').textContent=guestPronoun;
     if(document.getElementById('s4optwish'))document.getElementById('s4optwish').textContent=wish||'a gift';
-    if(document.getElementById('s4optmax'))document.getElementById('s4optmax').textContent=max||'10';
+    if(document.getElementById('s4optmax'))document.getElementById('s4optmax').textContent=max;
+    showSug(!!max);
     window._guestPP=pp;
     // Gift-only view for champion link
     if(p.get('gift')==='1'){
